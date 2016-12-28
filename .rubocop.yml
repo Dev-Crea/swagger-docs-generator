@@ -1,0 +1,10 @@
+AllCops:
+  Exclude:
+    - Gemfile
+    - swagger-docs-generator.gemspec
+    - bin/**/*
+    - lib/**/*
+  TargetRubyVersion: 2.3
+
+Metrics/LineLength:
+  Max: 80

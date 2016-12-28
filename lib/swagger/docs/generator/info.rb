@@ -18,6 +18,8 @@ module Swagger
       DESCRIPTION =   'Generates swagger-ui json file for rails-api'
       # Homepage
       HOMEPAGE =      'https://github.com/Dev-Crea/swagger-docs-generator'
+      # License
+      LICENSE =       'MIT'
     end
   end
 end

@@ -9,6 +9,7 @@ Gem::Specification.new do |spec|
   spec.version       = Swagger::Docs::Generator::VERSION
   spec.authors       = Swagger::Docs::Generator::AUTHORS
   spec.email         = Swagger::Docs::Generator::EMAILS
+  spec.license       = Swagger::Docs::Generator::LICENSE
 
   spec.summary       = Swagger::Docs::Generator::SUMMARY
   spec.description   = Swagger::Docs::Generator::DESCRIPTION

@@ -1,1 +1,2 @@
-require 'swagger/docs/generator/version'
+# Information for this gem
+require 'swagger/docs/generator/info'

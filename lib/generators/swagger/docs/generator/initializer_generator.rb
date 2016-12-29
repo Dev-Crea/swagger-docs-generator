@@ -8,6 +8,8 @@ module Swagger
         INITIALIZER = <<-INIT
 # frozen_string_literal: true
 
+require 'swagger_docs_generator'
+
 Swagger::Docs::Generator.configure do |config|
   config.version_swagger = '2.2.4'
   config.version_api = '1.0.0'

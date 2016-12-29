@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# :reek:TooManyConstants
+# :reek:Attribute
 module Swagger
   module Docs
     module Generator
@@ -8,7 +8,7 @@ module Swagger
       #
       # This class it's a DSL class. For customize default json file.
       class Configuration
-        attr_reader :version_swagger, :version_api, :base_apth, :attribute
+        attr_accessor :version_swagger, :version_api, :base_path, :attribute
 
         def configure(&block)
           yield self
@@ -20,18 +20,18 @@ module Swagger
           @base_path = 'localhost:3000'
           @attribute = {}
         end
+      end
 
-        class << self
-          def configure
-            yield config
-          end
-
-          def config
-            @config ||= Configuration.new
-          end
-
-          alias :configuration :config
+      class << self
+        def configure
+          yield config
         end
+
+        def config
+          @config ||= Configuration.new
+        end
+
+        alias :configuration :config
       end
     end
   end

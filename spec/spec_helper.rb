@@ -2,7 +2,7 @@
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
-require 'swagger/docs/generator'
+require 'swagger_docs_generator'
 
 RSpec.configure do |config|
   # Configure RSpec

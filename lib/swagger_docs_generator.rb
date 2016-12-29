@@ -1,12 +1,15 @@
 # Information for this gem
-require 'swagger/docs/generator/info'
+require 'swagger_docs_generator/info'
 
 # Class configuration
-require 'swagger/docs/generator/configuration'
+require 'swagger_docs_generator/configuration'
 
 # Generator for swagger json file
-require 'swagger/docs/generator/generator'
-require 'swagger/docs/generator/metadata'
+require 'swagger_docs_generator/generator'
+require 'swagger_docs_generator/metadata'
 
 # Tasks
-require 'swagger/docs/generator/task' if defined?(Rails)
+require 'swagger_docs_generator/railtie' if defined?(Rails)
+
+module SwaggerDocsGenerator
+end

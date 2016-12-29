@@ -29,6 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'reek', '~> 4.2', '>= 4.2.4'
   spec.add_development_dependency 'activesupport', '~> 4.2', '>= 4.2.7.1'
   spec.add_development_dependency 'pry-byebug', '~> 3.4'
-  spec.add_development_dependency 'aruba', '~> 0.14.2'
   spec.add_development_dependency 'json-schema-rspec', '~> 0.0.4'
 end

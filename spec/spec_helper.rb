@@ -4,7 +4,6 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
 require 'bundler/setup'
 require 'swagger_docs_generator'
-require 'aruba/rspec'
 require 'json-schema-rspec'
 
 RSpec.configure do |config|
@@ -14,7 +13,6 @@ RSpec.configure do |config|
   end
 
   # Add libraries
-  config.include Aruba::Api
   config.include JSON::SchemaMatchers
 
   # Configure JSON::SchemaMatchers

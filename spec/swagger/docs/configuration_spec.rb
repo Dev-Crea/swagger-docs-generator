@@ -2,7 +2,8 @@
 
 require 'spec_helper'
 
-describe Swagger::Docs::Generator::Configuration, type: :configuration do
+describe Swagger::Docs::Generator::Configuration, type: :gem,
+                                                  name: :configuration do
   specify do
     expect do |config|
       Swagger::Docs::Generator.configure(&config)

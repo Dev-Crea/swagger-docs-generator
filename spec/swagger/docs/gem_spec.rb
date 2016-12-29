@@ -2,7 +2,8 @@
 
 require 'spec_helper'
 
-describe Swagger::Docs::Generator, type: :gem do
+describe Swagger::Docs::Generator, type: :gem,
+                                   name: :constant do
   it 'has a gem name' do
     expect(Swagger::Docs::Generator::GEM).not_to be nil
   end

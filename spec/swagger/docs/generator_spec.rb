@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Swagger::Docs::Generator::Generator, type: :aruba,
+describe Swagger::Docs::Generator::Generator, type: :gem,
                                               name: :generator do
   before(:context) do
     @swag = Swagger::Docs::Generator::Generator.new

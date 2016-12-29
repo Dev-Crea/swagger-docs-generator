@@ -41,7 +41,7 @@ module Swagger
         end
 
         def agregate_metadata
-          case Rails.env
+          case defined?(Rails) && Rails.env
           when 'production' || 'test'
             write_inswagger_file.to_json
           else

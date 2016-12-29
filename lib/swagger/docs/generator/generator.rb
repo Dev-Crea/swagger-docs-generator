@@ -16,7 +16,7 @@ module Swagger
         private
 
         def generate_swagger_file
-          swagger_file = File.new("#{@path}/#{@file}", 'a+')
+          swagger_file = File.new(File.join(Dir.pwd, @path, @file), 'a+')
           swagger_file.puts('Test')
           swagger_file.close
         end

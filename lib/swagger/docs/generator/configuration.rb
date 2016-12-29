@@ -25,15 +25,19 @@ module Swagger
       class Configuration
         attr_accessor :version_swagger, :version_api, :base_path, :attribute
 
+        VERSION_SWAGGER = '1.0.4'
+        VERSION_API = '1.0.0'
+        BASE_PATH = 'localhost:3000'
+
         def configure(&block)
           yield self
         end
 
         # Initalize default value for json swagger file
         def initialize
-          @version_swagger = '1.0.4'
-          @version_api = '1.0.0'
-          @base_path = 'localhost:3000'
+          @version_swagger = VERSION_SWAGGER
+          @version_api = VERSION_API
+          @base_path = BASE_PATH
           @attribute = {}
         end
       end

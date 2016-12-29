@@ -29,6 +29,7 @@ module Swagger
           yield self
         end
 
+        # Initalize default value for json swagger file
         def initialize
           @version_swagger = '1.0.4'
           @version_api = '1.0.0'

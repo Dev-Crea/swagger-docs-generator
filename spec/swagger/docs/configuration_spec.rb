@@ -3,7 +3,9 @@
 require 'spec_helper'
 
 describe Swagger::Docs::Generator::Configuration, type: :configuration do
-  it 'should confirm a block is passed' do
-    expect(String).to receive(:bar) { |&block| expect(block).to be_a(Proc) }
+  specify do
+    expect do |config|
+      Swagger::Docs::Generator.configure(&config)
+    end.to yield_control
   end
 end

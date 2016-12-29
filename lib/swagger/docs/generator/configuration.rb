@@ -20,6 +20,18 @@ module Swagger
           @base_path = 'localhost:3000'
           @attribute = {}
         end
+
+        class << self
+          def configure
+            yield config
+          end
+
+          def config
+            @config ||= Configuration.new
+          end
+
+          alias :configuration :config
+        end
       end
     end
   end

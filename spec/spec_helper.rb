@@ -10,6 +10,17 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
+  # Add libraries
+  config.include Aruba::Api
+  config.include JSON::SchemaMatchers
+
+  # Configure JSON::SchemaMatchers
+  Dir[File.join('spec/support/scheams/', '*.json')].count do |file|
+    json_file = JSON.parse(File.read(file))
+    json_name = File.basename(file, '.json').to_sym
+    config.json_schemas[json_name] = json_file
+  end
+
   # Exclude request with tag broken
   config.filter_run_excluding broken: true
 

@@ -11,16 +11,38 @@ module SwaggerDocsGenerator
       @config = SwaggerDocsGenerator.configuration
     end
 
-    def version_swagger
-      { swagger: @config.version_swagger }
+    def construct_swagger_file
+      hash = {}
+      SwaggerDocsGenerator::Metadata.protected_instance_methods.each do |method|
+        hash.merge!(send(method))
+      end
+      hash
+    end
+
+    protected
+
+    def swagger
+      { swagger: @config.swagger }
     end
 
     def base_path
       { basePath: @config.base_path }
     end
 
-    def attributes
-      { info: @config.attribute.merge!(version: @config.version_api) }
+    def info
+      { info: @config.info }
+    end
+
+    def schemes
+      { schemes: @config.schemes }
+    end
+
+    def consumes
+      { consumes: @config.consumes }
+    end
+
+    def produces
+      { produces: @config.produces }
     end
   end
 end

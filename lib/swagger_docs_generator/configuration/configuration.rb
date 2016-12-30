@@ -28,19 +28,14 @@ module SwaggerDocsGenerator
   #
   # @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
   class Configuration
-    attr_accessor :version_swagger, :version_api, :base_path, :attribute
+    attr_accessor :swagger, :base_path, :info, :schemes, :consumes, :produces
 
-    VERSION_SWAGGER = '1.0.4'
-    VERSION_API = '1.0.0'
-    BASE_PATH = 'localhost:3000'
-    ATTRIBUTE = { title: 'Title Example API' }
+    SWAGGER = '1.0.4'
 
     # Initalize default value for json swagger file
     def initialize
-      @version_swagger = VERSION_SWAGGER
-      @version_api = VERSION_API
-      @base_path = BASE_PATH
-      @attribute = ATTRIBUTE
+      @swagger = SWAGGER
+      @info = ConfigurationInfo.new
     end
   end
 

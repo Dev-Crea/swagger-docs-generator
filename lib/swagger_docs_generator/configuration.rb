@@ -19,6 +19,13 @@ module SwaggerDocsGenerator
   #     }
   #   end
   #
+  #   SwaggerDocsGenerator.config
+  #   => #<SwaggerDocsGenerator::Configuration:0x007f8ae49138d8
+  #    @attribute={ ...  }
+  #    @base_path="api.example.com"
+  #    @version_api='1.0.0'
+  #    @version_swagger='2.0.0'>
+  #
   # @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
   class Configuration
     attr_accessor :version_swagger, :version_api, :base_path, :attribute

@@ -7,7 +7,8 @@ module SwaggerDocsGenerator
   class Metadata
     attr_reader :config
     def initialize
-      @config = Swagger::Docs::Generator.config
+      @config = SwaggerDocsGenerator.config
+      puts "Config : #{@config.inspect}"
     end
 
     def version_swagger

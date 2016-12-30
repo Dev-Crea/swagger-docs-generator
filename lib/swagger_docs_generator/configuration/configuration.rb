@@ -8,10 +8,8 @@ module SwaggerDocsGenerator
   #
   # @example
   #   SwaggerDocsGenerator.configure do |config|
-  #     config.version_swagger = '2.0.0'
-  #     config.version_api = '1.0.0'
-  #     config.base_path = 'api.example.com'
-  #     config.attribute = {
+  #     config.swagger = '2.0.0'
+  #     config.info = {
   #       info: {
   #         title: 'Topisime API',
   #         description: 'Super Topisime API for http://example.com service'
@@ -21,10 +19,8 @@ module SwaggerDocsGenerator
   #
   #   SwaggerDocsGenerator.config
   #   => #<SwaggerDocsGenerator::Configuration:0x007f8ae49138d8
-  #    @attribute={ ...  }
-  #    @base_path="api.example.com"
-  #    @version_api='1.0.0'
-  #    @version_swagger='2.0.0'>
+  #    @info={ ...  }
+  #    @swagger='2.0.0'>
   #
   # @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
   class Configuration

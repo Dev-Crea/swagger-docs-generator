@@ -7,12 +7,12 @@ module SwaggerDocsGenerator
 # frozen_string_literal: true
 
 SwaggerDocsGenerator.configure do |config|
-  config.version_swagger = '2.2.4'
-  config.version_api = '1.0.0'
+  config.swagger = '2.2.4'
   config.base_path = 'localhost:3000'
-  config.attribute = {
+  config.info = {
     info: {
-      title: 'API example.com'
+      title: 'API example.com',
+      version: '1.0.0'
     }
   }
 end

@@ -2,10 +2,10 @@
 
 require 'spec_helper'
 
-describe Swagger::Docs::Generator::Generator, type: :gem,
-                                              name: :generator do
+describe SwaggerDocsGenerator::Generator, type: :gem,
+                                          name: :generator do
   before(:context) do
-    @swag = Swagger::Docs::Generator::Generator.new
+    @swag = SwaggerDocsGenerator::Generator.new
     @swagger_file = @swag.swagger_file
   end
 

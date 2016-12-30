@@ -24,7 +24,9 @@ module SwaggerDocsGenerator
   #
   # @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
   class Configuration
-    attr_accessor :swagger, :base_path, :info, :schemes, :consumes, :produces
+    attr_accessor :swagger, :base_path, :info, :schemes, :consumes, :produces,
+                  :host, :paths, :definitions, :security_definitions,
+                  :security, :tags, :external_docs
 
     SWAGGER = '1.0.4'
 

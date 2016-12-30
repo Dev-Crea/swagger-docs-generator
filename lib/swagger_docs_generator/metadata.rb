@@ -44,5 +44,25 @@ module SwaggerDocsGenerator
     def produces
       { produces: @config.produces }
     end
+
+    def host
+      { host: @config.host }
+    end
+
+    def definitions
+      { definitions: @config.definitions }
+    end
+
+    def external_docs
+      { external_docs: @config.external_docs }
+    end
+
+    def tags
+      { tags: @config.tags }
+    end
+
+    def security
+      { security: @config.security }
+    end
   end
 end

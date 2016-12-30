@@ -16,7 +16,6 @@ module SwaggerDocsGenerator
       @file = 'swagger.json'
       @path = '/public'
       @swagger_file = File.join(Dir.pwd, @path, @file)
-      @meta = Metadata.new
     end
 
     def generate_swagger_file
@@ -34,8 +33,11 @@ module SwaggerDocsGenerator
       File.delete(@swagger_file) if File.exist?(@swagger_file)
     end
 
+    # :reek:UtilityFunction
     def write_in_swagger_file
-      @meta.construct_swagger_file
+      hash = {}
+      hash.merge!(MetadataConfiguration.new.construct_swagger_file)
+      hash.merge!(MetadataInfo.new.construct_swagger_file)
     end
 
     def agregate_metadata

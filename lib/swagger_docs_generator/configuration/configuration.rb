@@ -24,7 +24,7 @@ module SwaggerDocsGenerator
   #
   # @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
   class Configuration
-    attr_accessor :swagger, :base_path, :info, :schemes, :consumes, :produces,
+    attr_accessor :swagger, :base_path, :schemes, :consumes, :produces,
                   :host, :paths, :definitions, :security_definitions,
                   :security, :tags, :external_docs
 
@@ -33,7 +33,6 @@ module SwaggerDocsGenerator
     # Initalize default value (and requried) for json swagger file
     def initialize
       @swagger = SWAGGER
-      @info = ConfigurationInfo.new
     end
   end
 
@@ -45,7 +44,5 @@ module SwaggerDocsGenerator
     def config
       @config ||= Configuration.new
     end
-
-    alias :configuration :config
   end
 end

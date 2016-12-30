@@ -10,15 +10,17 @@ describe SwaggerDocsGenerator::Configuration, type: :gem,
   end
 
   let(:conf) { SwaggerDocsGenerator.configure }
-  let(:variable) { conf.version_swagger }
-  it_behaves_like 'variable exist', 'version_swagger'
-  it_behaves_like 'variable exist', 'version_api'
-  it_behaves_like 'variable exist', 'attribute'
-  it_behaves_like 'variable exist', 'base_path'
+  let(:variable) { conf.swagger }
+  it_behaves_like 'variable exist', 'swagger'
+  let(:variable) { conf.info }
+  it_behaves_like 'variable exist', 'info'
+end
 
-  let(:swag) { SwaggerDocsGenerator::Configuration }
-  it { expect(swag::VERSION_SWAGGER).to eql('1.0.4') }
-  it { expect(swag::VERSION_API).to eql('1.0.0') }
-  it { expect(swag::BASE_PATH).to eql('localhost:3000') }
-  it { expect(swag::ATTRIBUTE).to eql(title: 'Title Example API') }
+describe SwaggerDocsGenerator::ConfigurationInfo, type: :gem,
+                                                  name: :configuration_info do
+  let(:conf) { SwaggerDocsGenerator.configure }
+  let(:variable) { conf.info.title }
+  it_behaves_like 'variable exist', 'title'
+  let(:variable) { conf.info.version }
+  it_behaves_like 'variable exist', 'version'
 end

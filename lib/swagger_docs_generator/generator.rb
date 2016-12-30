@@ -35,10 +35,7 @@ module SwaggerDocsGenerator
     end
 
     def write_in_swagger_file
-      hash = {}
-      hash.merge!(@meta.version_swagger)
-      hash.merge!(@meta.base_path)
-      hash.merge!(@meta.attributes)
+      @meta.construct_swagger_file
     end
 
     def agregate_metadata

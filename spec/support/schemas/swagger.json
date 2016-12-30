@@ -4,12 +4,12 @@
     "swagger": {
       "type": "string"
     },
-    "basePath": {
-      "type": "string"
+    "info": {
+      "type": "hash"
     }
   },
   "required": [
     "swagger",
-    "basePath"
+    "info"
   ]
 }

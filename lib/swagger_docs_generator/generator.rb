@@ -44,7 +44,7 @@ module SwaggerDocsGenerator
     def agregate_metadata
       case defined?(Rails) && Rails.env
       when 'production' || 'test'
-        write_inswagger_file.to_json
+        write_in_swagger_file.to_json
       else
         JSON.pretty_generate write_in_swagger_file
       end

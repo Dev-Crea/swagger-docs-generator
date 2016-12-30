@@ -3,7 +3,7 @@
 # :reek:TooManyConstants
 module SwaggerDocsGenerator
   # Name to gem
-  GEM =           'swagger-docs-generator'
+  GEM =           'swagger_docs_generator'
   # Version to gem
   VERSION =       '0.1.0'
   # Authors contributed to gem

@@ -36,7 +36,6 @@ module SwaggerDocsGenerator
 
     # Initalize default value for json swagger file
     def initialize
-      puts 'Class Configuration - new'
       @version_swagger = VERSION_SWAGGER
       @version_api = VERSION_API
       @base_path = BASE_PATH
@@ -46,12 +45,10 @@ module SwaggerDocsGenerator
 
   class << self
     def configure
-      puts 'Module SwaggerDocsGenerator - configure'
       block_given? ? yield(config) : config
     end
 
     def config
-      puts 'Module SwaggerDocsGenerator - config'
       @config ||= Configuration.new
     end
 

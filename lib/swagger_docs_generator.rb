@@ -10,6 +10,3 @@ require 'swagger_docs_generator/metadata'
 
 # Tasks
 require 'swagger_docs_generator/railtie' if defined?(Rails)
-
-module SwaggerDocsGenerator
-end

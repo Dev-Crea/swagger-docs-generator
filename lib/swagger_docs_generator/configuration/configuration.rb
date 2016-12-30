@@ -28,7 +28,7 @@ module SwaggerDocsGenerator
 
     SWAGGER = '1.0.4'
 
-    # Initalize default value for json swagger file
+    # Initalize default value (and requried) for json swagger file
     def initialize
       @swagger = SWAGGER
       @info = ConfigurationInfo.new

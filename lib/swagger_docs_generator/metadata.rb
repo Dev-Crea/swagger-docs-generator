@@ -14,7 +14,7 @@ module SwaggerDocsGenerator
     def construct_swagger_file
       hash = {}
       SwaggerDocsGenerator::Metadata.protected_instance_methods.each do |method|
-        hash.merge!(send(method))
+        hash.merge!(send(method)) unless @config.send(method).blank?
       end
       hash
     end

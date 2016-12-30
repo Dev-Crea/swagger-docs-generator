@@ -8,13 +8,13 @@ module SwaggerDocsGenerator
 
 SwaggerDocsGenerator.configure do |config|
   config.swagger = '2.2.4'
-  config.base_path = 'localhost:3000'
-  config.info = {
-    info: {
-      title: 'API example.com',
-      version: '1.0.0'
-    }
-  }
+  config.base_path = '/'
+  config.host = 'localhost:3000'
+end
+
+SwaggerDocsGenerator.configure_info do |info|
+  info.title = 'API example.com'
+  info.version = '1.0.0'
 end
     INIT
 

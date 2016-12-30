@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'support/examples/generator'
 
 describe SwaggerDocsGenerator::Generator, type: :gem,
                                           name: :generator do
@@ -12,6 +13,11 @@ describe SwaggerDocsGenerator::Generator, type: :gem,
   context 'File exist' do
     before(:context) do
       @swag.generate_swagger_file
+    end
+
+    describe '#generate_swagger_file' do
+      let(:method) { @swag.generate_swagger_file }
+      it_behaves_like 'method', nil
     end
 
     it { expect(File.exist?(@swagger_file)).to eql(true) }

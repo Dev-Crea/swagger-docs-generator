@@ -9,7 +9,6 @@ module SwaggerDocsGenerator
 
     def initialize
       @config = SwaggerDocsGenerator.configuration
-      puts "Config : #{@config.inspect}"
     end
 
     def version_swagger

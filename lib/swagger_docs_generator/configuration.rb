@@ -28,24 +28,26 @@ module SwaggerDocsGenerator
     BASE_PATH = 'localhost:3000'
 
     # Initalize default value for json swagger file
-    def initialize(&block)
+    def initialize
+      puts 'Class Configuration - new'
       @version_swagger = VERSION_SWAGGER
       @version_api = VERSION_API
       @base_path = BASE_PATH
       @attribute = {}
-      instance_eval(&block) if block_given?
+    end
+  end
+
+  class << self
+    def configure
+      puts 'Module SwaggerDocsGenerator - configure'
+      block_given? ? yield(config) : config
     end
 
-    class << self
-      def configure
-        yield config
-      end
-
-      def config
-        @config ||= Configuration.new
-      end
-
-      alias :configuration :config
+    def config
+      puts 'Module SwaggerDocsGenerator - config'
+      @config ||= Configuration.new
     end
+
+    alias :configuration :config
   end
 end

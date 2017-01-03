@@ -4,8 +4,9 @@
 module SwaggerDocsGenerator
   module Methods
     # Create json file for controller
-    def swagger_controller(controller, _description)
+    def swagger_controller(controller, description)
       FileUtils.touch(controller_file(controller))
+      # create_a_tag(controller, description)
     end
 
     # Complete json file with datas to method and controller, controller reading
@@ -31,11 +32,24 @@ module SwaggerDocsGenerator
       {
         "/#{action}": {
           verb => {
+            tags: [ controller.controller_name ],
             summary: data[:summary],
             description: data[:description]
           }
         }
       }
+    end
+
+    def create_a_tag(controller, description)
+      ctr_name = controller.controller_name
+      path = File.join(Dir.pwd, '/public')
+      file = File.join(path, "swagger.json")
+      File.open(file, 'r+') do |f|
+        puts File.read(f)
+        hash = JSON.parse(File.read(f))
+        hash[:Tags].push({ name: ctr_name, description: description })
+        f.write(hash)
+      end
     end
   end
 end

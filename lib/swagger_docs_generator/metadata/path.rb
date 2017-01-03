@@ -6,7 +6,6 @@ require 'json'
 module SwaggerDocsGenerator
   class MetadataPath < Metadata
     def initialize
-      @config = SwaggerDocsGenerator.configure_path
       # Reload all controller before parsing
       Rails.application.eager_load!
     end

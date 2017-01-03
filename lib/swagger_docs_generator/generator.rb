@@ -18,6 +18,7 @@ module SwaggerDocsGenerator
       @swagger_file = File.join(Dir.pwd, @path, @file)
     end
 
+    # Open or create a swagger.json file
     def generate_swagger_file
       delete_file_before
       swagger_file = File.new(@swagger_file, 'a+')

@@ -2,10 +2,12 @@
 
 module SwaggerDocsGenerator
   module Methods
-    def swagger_controller(description, params = {})
-      puts "Controller : #{self.name}"
-      puts "Description : #{description}"
-      puts "Params : #{params}"
+    def swagger_controller(_description)
+      # Create json file for controller
+      path = File.join(Dir.pwd, '/public')
+      version_api = SwaggerDocsGenerator.configure_info.version
+      json_file = "#{self.controller_name}.json"
+      FileUtils.touch(File.join(path, version_api, json_file))
     end
 
     def swagger_doc(action, &block)

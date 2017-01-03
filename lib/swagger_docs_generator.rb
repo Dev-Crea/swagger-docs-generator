@@ -6,6 +6,9 @@ require 'swagger_docs_generator/configuration/configuration'
 require 'swagger_docs_generator/configuration/configuration_info'
 require 'swagger_docs_generator/configuration/configuration_path'
 
+# Modules methods in a controller
+require 'swagger_docs_generator/methods'
+
 # Generator for swagger json file
 require 'swagger_docs_generator/generator'
 require 'swagger_docs_generator/metadata/metadata'

@@ -4,7 +4,6 @@ require 'swagger_docs_generator/info'
 # Class configuration
 require 'swagger_docs_generator/configuration/configuration'
 require 'swagger_docs_generator/configuration/configuration_info'
-require 'swagger_docs_generator/configuration/configuration_path'
 
 # Modules methods in a controller
 require 'swagger_docs_generator/methods'

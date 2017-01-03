@@ -13,7 +13,7 @@ module SwaggerDocsGenerator
       ctr_file = controller_file(ctrl)
       json = File.read(ctr_file)
       hash = json.blank? ? {} : JSON.parse(json)
-      File.open(ctr_file(ctrl), 'w') do |file|
+      File.open(ctr_file, 'w') do |file|
         file.puts(hash.merge!(construct_routes(ctrl, action, data)).to_json)
       end
     end

@@ -23,14 +23,6 @@ module SwaggerDocsGenerator
       { schemes: @config.schemes }
     end
 
-    def consumes
-      { consumes: @config.consumes }
-    end
-
-    def produces
-      { produces: @config.produces }
-    end
-
     def host
       { host: @config.host }
     end
@@ -41,10 +33,6 @@ module SwaggerDocsGenerator
 
     def external_docs
       { external_docs: @config.external_docs }
-    end
-
-    def tags
-      { tags: @config.tags }
     end
 
     def security

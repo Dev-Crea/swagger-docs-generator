@@ -27,5 +27,13 @@ module SwaggerDocsGenerator
     def terms_of_service
       { terms_of_service: @config.terms_of_service }
     end
+
+    def contact
+      { contact: @config.contact }
+    end
+
+    def license
+      { license: @config.license }
+    end
   end
 end

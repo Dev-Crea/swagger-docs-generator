@@ -4,14 +4,23 @@ module SwaggerDocsGenerator
   class MetadataPath < Metadata
     def initialize
       @config = SwaggerDocsGenerator.configure_path
+      # Reload all controller before parsing
+      Rails.application.eager_load!
     end
 
+    # Each cotnroller parsed
     def construct_swagger_file
+      path = File.join(Dir.pwd, 'public',
+                       SwaggerDocsGenerator.configure_info.version)
       hash = {}
-      self.class.protected_instance_methods.each do |method|
-        hash.merge!(send(method))
+      controllers = ApplicationController.subclasses
+      controllers.each do |controller|
+        if File.exist?(File.join(path, "#{controller.controller_name}.json"))
+          puts "path: '#{SwaggerDocsGenerator.configure_info.version}/#{controller.controller_name}'"
+          hash.merge!('$ref': controller.controller_name)
+        end
       end
-      { paths: hash }
+      { apis: hash }
     end
 
     protected

@@ -9,6 +9,9 @@ require 'swagger_docs_generator/configuration/configuration_path'
 # Modules methods in a controller
 require 'swagger_docs_generator/methods'
 
+# Extractor verb
+require 'swagger_docs_generator/extractor'
+
 # Generator for swagger json file
 require 'swagger_docs_generator/generator'
 require 'swagger_docs_generator/metadata/metadata'

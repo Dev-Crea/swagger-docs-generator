@@ -15,21 +15,30 @@ module SwaggerDocsGenerator
     def adding_path
       json = JSON.parse(File.read(controller_file))
       File.open(controller_file, 'w') do |file|
-        hash = construct_routes
-        control_presence(json, 'paths', hash)
+        path_exist(json, construct_routes)
         file.puts(JSON.pretty_generate(json))
       end
     end
 
     private
 
+    # :reek:UtilityFunction
+    def path_exist(json, hash)
+      old_route = json['paths']
+
+      keys_new = hash.keys[0]
+      keys_old = old_route.keys[0]
+
+      if keys_new.to_s.eql?(keys_old.to_s)
+        old_route[keys_old].merge!(hash[keys_new])
+      else
+        old_route.merge!(hash)
+      end
+    end
+
     def construct_routes
       extract = Extractor.new(controller, @action)
-      {
-        "#{extract.path}": {
-          "#{extract.verb}": {}.merge!(super_hash)
-        }
-      }
+      { "#{extract.path}": { "#{extract.verb}": super_hash } }
     end
 
     def super_hash

@@ -44,9 +44,8 @@ module SwaggerDocsGenerator
         "#{extract.path}": {
           "#{extract.verb}": {
             tags: [controller.controller_name],
-            summary: data[:summary],
-            description: data[:description]
-          }
+            summary: data[:summary]
+          }.merge!(responses?(data)).merge!(description?(data))
         }
       }
     end
@@ -70,6 +69,24 @@ module SwaggerDocsGenerator
         json[value] = hash
       else
         json[value].merge!(hash)
+      end
+    end
+
+    def responses?(data)
+      {
+        responses: if data.key?(:responses)
+                     data[:responses]
+                   else
+                     { ok: { description: 'Request successfully processed.' } }
+                   end
+      }
+    end
+
+    def description?(data)
+      if data.key?(:description)
+        { description: data[:description] }
+      else
+        {}
       end
     end
   end

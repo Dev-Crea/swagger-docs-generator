@@ -34,16 +34,14 @@ module SwaggerDocsGenerator
 
     def super_hash
       hash = {}
-      [
-        Actions::Tags.new(controller_name),
-        Actions::Summary.new(@data),
-        Actions::Description.new(@data),
-        Actions::Consume.new(@data),
-        Actions::Produce.new(@data),
-        Actions::Response.new(@data),
-        Actions::Parameters.new(@data)
-      ].each { |value| hash.merge!(value.hash) }
+      SwaggerDocsGenerator::Actions::Actions.descendants.each do |klass|
+        hash.merge!(klass.new(expect_tag(klass)).hash)
+      end
       hash
+    end
+
+    def expect_tag(klass)
+      klass.eql?(Actions::Tags) ? controller_name : @data
     end
   end
 end

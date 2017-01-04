@@ -5,7 +5,7 @@ module SwaggerDocsGenerator
     # # Test :consumes
     #
     # Complete consume field for action
-    class Consume < Actions
+    class Consumes < Actions
       VALUE = :consumes
 
       def initialize(data)

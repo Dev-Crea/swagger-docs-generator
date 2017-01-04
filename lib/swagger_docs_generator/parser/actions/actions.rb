@@ -18,6 +18,11 @@ module SwaggerDocsGenerator
         @hash[@key] ? @hash : {}
       end
 
+      # List to all childrens
+      def self.descendants
+        ObjectSpace.each_object(Class).select { |klass| klass < self }
+      end
+
       private
 
       def complete_hash(data)

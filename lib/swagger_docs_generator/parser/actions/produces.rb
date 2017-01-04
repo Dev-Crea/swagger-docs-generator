@@ -5,7 +5,7 @@ module SwaggerDocsGenerator
     # # Test :produces
     #
     # Complete consume field for action
-    class Produce < Actions
+    class Produces < Actions
       VALUE = :produces
 
       def initialize(data)

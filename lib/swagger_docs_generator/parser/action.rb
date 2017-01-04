@@ -38,6 +38,8 @@ module SwaggerDocsGenerator
         Actions::Tags.new(controller_name),
         Actions::Summary.new(@data),
         Actions::Description.new(@data),
+        Actions::Consume.new(@data),
+        Actions::Produce.new(@data),
         Actions::Response.new(@data)
       ].each { |value| hash.merge!(value.hash) }
       hash

@@ -5,6 +5,7 @@ module SwaggerDocsGenerator
     # # Test value in actions
     #
     # @abstract classes for all actions class
+    # @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#operation-object
     class Actions
       attr_reader :hash, :key
 
@@ -31,5 +32,6 @@ require 'swagger_docs_generator/parser/actions/tags'
 require 'swagger_docs_generator/parser/actions/summary'
 require 'swagger_docs_generator/parser/actions/description'
 require 'swagger_docs_generator/parser/actions/response'
-require 'swagger_docs_generator/parser/actions/consume'
-require 'swagger_docs_generator/parser/actions/produce'
+require 'swagger_docs_generator/parser/actions/consumes'
+require 'swagger_docs_generator/parser/actions/produces'
+require 'swagger_docs_generator/parser/actions/parameters'

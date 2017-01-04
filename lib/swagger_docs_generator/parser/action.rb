@@ -40,7 +40,8 @@ module SwaggerDocsGenerator
         Actions::Description.new(@data),
         Actions::Consume.new(@data),
         Actions::Produce.new(@data),
-        Actions::Response.new(@data)
+        Actions::Response.new(@data),
+        Actions::Parameters.new(@data)
       ].each { |value| hash.merge!(value.hash) }
       hash
     end

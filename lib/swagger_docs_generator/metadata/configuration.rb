@@ -3,7 +3,9 @@
 module SwaggerDocsGenerator
   # # Metadata generated
   #
-  # Metadata generated in swagger json file
+  # Generate metadata for block schema in swagger specification
+  #
+  # @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schema
   class MetadataConfiguration < Metadata
     def initialize
       @config = SwaggerDocsGenerator.configure

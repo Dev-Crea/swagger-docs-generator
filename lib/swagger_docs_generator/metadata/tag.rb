@@ -6,26 +6,21 @@ require 'json'
 module SwaggerDocsGenerator
   # # Metadata generated
   #
-  # Generate metadata for block paths in swagger specification
+  # Generate metadata for block tag in swagger specification
   #
-  # @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#pathsObject
-  class MetadataPath < Metadata
-    def initialize
-      # Reload all controller before parsing
-      Rails.application.eager_load!
-    end
-
-    # Each controller parsed
+  # @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#tagObject
+  class MetadataTag < Metadata
+    # Create tag
     def construct_swagger_file
       path = File.join(Dir.pwd, 'public',
                        SwaggerDocsGenerator.configure_info.version)
-      hash = {}
+      array = []
       controllers = ApplicationController.subclasses
       controllers.each do |controller|
         file = File.join(path, "#{controller.controller_name}.json")
-        hash.merge!(JSON.parse(File.read(file))['paths']) if File.exist?(file)
+        array.push(JSON.parse(File.read(file))['tags']) if File.exist?(file)
       end
-      { paths: hash }
+      { tags: array }
     end
   end
 end

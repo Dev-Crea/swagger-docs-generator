@@ -2,29 +2,35 @@
 
 # :reek:TooManyStatements and :reek:UtilityFunction
 module SwaggerDocsGenerator
+  # # Methods for controller
+  #
+  # Methods adding to controller parsing in rails appliation
   module Methods
     # Create json file for controller
-    def swagger_controller(controller, _description)
-      p 'Parse controller'
+    def swagger_controller(controller, description)
       ctr_file = controller_file(controller)
-      File.delete(ctr_file) if File.exist?(ctr_file)
-      FileUtils.touch(ctr_file)
-      # create_a_tag(controller, description)
+      prepare_file(ctr_file)
+      create_a_tag(ctr_file, controller, description)
     end
 
     # Complete json file with datas to method and controller, controller reading
     def swagger_doc(ctrl, action, data = {})
-      p 'Parse action in controller'
       ctr_file = controller_file(ctrl)
-      json = File.read(ctr_file)
-      hash = json.blank? ? {} : JSON.parse(json)
+      json = JSON.parse(File.read(ctr_file))
       File.open(ctr_file, 'w') do |file|
-        json = construct_routes(ctrl, action, data)
-        file.puts(JSON.pretty_generate(hash.merge!(json)))
+        hash = construct_routes(ctrl, action, data)
+        control_presence(json, 'paths', hash)
+        file.puts(JSON.pretty_generate(json))
       end
     end
 
     private
+
+    def prepare_file(ctr_file)
+      File.delete(ctr_file) if File.exist?(ctr_file)
+      base_file = { paths: {}, tags: {} }
+      File.open(ctr_file, 'a+') { |file| file.puts(base_file.to_json) }
+    end
 
     def controller_file(ctrl)
       path = File.join(Dir.pwd, '/public')
@@ -34,12 +40,10 @@ module SwaggerDocsGenerator
 
     def construct_routes(controller, action, data)
       extract = SwaggerDocsGenerator::Extractor.new(controller, action)
-      verb = extract.verb
-      path = extract.path
       {
-        "#{path}": {
-          "#{verb}": {
-            tags: [ controller.controller_name ],
+        "#{extract.path}": {
+          "#{extract.verb}": {
+            tags: [controller.controller_name],
             summary: data[:summary],
             description: data[:description]
           }
@@ -47,16 +51,25 @@ module SwaggerDocsGenerator
       }
     end
 
-    def create_a_tag(controller, description)
-      p 'Create tag to controller'
-      ctr_name = controller.controller_name
-      path = File.join(Dir.pwd, '/public')
-      file = File.join(path, 'swagger.json')
-      File.open(file, 'a+') do |json|
-        puts File.read(f)
-        hash = JSON.parse(File.read(json))
-        hash[:Tags].push({ name: ctr_name, description: description })
-        json.write(hash)
+    def construct_tags(controller_name, description)
+      { name: controller_name, description: description }
+    end
+
+    def create_a_tag(ctr_file, controller, description)
+      ctr_file = controller_file(controller)
+      json = JSON.parse(File.read(ctr_file))
+      File.open(ctr_file, 'w') do |file|
+        hash = construct_tags(controller.controller_name, description)
+        control_presence(json, 'tags', hash)
+        file.puts(JSON.pretty_generate(json))
+      end
+    end
+
+    def control_presence(json, value, hash)
+      if json.values_at(value).blank?
+        json[value] = hash
+      else
+        json[value].merge!(hash)
       end
     end
   end

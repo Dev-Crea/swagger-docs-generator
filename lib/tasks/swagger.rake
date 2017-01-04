@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :swagger do
   desc 'Generate Swagger Documentation files'
   task docs: :environment do

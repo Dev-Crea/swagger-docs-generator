@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module SwaggerDocsGenerator
+  # # Generator Rails
+  #
+  # Create a initializer for rails application
   class InitializerGenerator < Rails::Generators::Base
     desc 'Generate a initializer for Swagger Docs Generator'
     INITIALIZER = <<-INIT

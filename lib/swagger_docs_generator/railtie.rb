@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module SwaggerDocsGenerator
+  # # Rake action
+  #
+  # Create an action for rails apps and executed with rake
   class Railtie < Rails::Railtie
     railtie_name :swagger
 

@@ -13,7 +13,7 @@ module SwaggerDocsGenerator
 
     def verb
       router do |route|
-        route.verb.source.to_s.delete('$'+'^')
+        route.verb.source.to_s.delete('$' + '^')
       end
     end
 
@@ -41,9 +41,7 @@ module SwaggerDocsGenerator
       data = nil
       @routes.map do |route|
         rte = route.defaults
-        if rte_controller(rte) && rte_action(rte)
-          data = yield(route, rte)
-        end
+        data = yield(route, rte) if rte_controller(rte) && rte_action(rte)
       end
       data.downcase
     end

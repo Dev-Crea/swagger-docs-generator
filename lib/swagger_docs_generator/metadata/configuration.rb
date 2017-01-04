@@ -34,7 +34,7 @@ module SwaggerDocsGenerator
     end
 
     def external_docs
-      { external_docs: @config.external_docs }
+      { externalDocs: @config.external_docs }
     end
 
     def security

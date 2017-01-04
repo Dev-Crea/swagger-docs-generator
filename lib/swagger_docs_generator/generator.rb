@@ -22,9 +22,13 @@ module SwaggerDocsGenerator
     def generate_swagger_file
       delete_file_before
       create_version_folder
-      swagger_file = File.new(@swagger_file, 'a+')
-      swagger_file.puts(agregate_metadata)
-      swagger_file.close
+      File.open(@swagger_file, 'a+') { |file| file.puts agregate_metadata }
+    end
+
+    # Delete files temporary
+    def delete_emporary_files
+      version = File.join(@path, SwaggerDocsGenerator.configure_info.version)
+      Dir.delete(File.join(@path, version))
     end
 
     private
@@ -46,6 +50,7 @@ module SwaggerDocsGenerator
       hash.merge!(MetadataConfiguration.new.construct_swagger_file)
       hash.merge!(MetadataInfo.new.construct_swagger_file)
       hash.merge!(MetadataPath.new.construct_swagger_file)
+      hash.merge!(MetadataTag.new.construct_swagger_file)
     end
 
     def agregate_metadata

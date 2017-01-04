@@ -22,3 +22,7 @@ module SwaggerDocsGenerator
     attr_reader :config
   end
 end
+
+require 'swagger_docs_generator/metadata/configuration'
+require 'swagger_docs_generator/metadata/info'
+require 'swagger_docs_generator/metadata/controller'

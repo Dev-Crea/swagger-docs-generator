@@ -15,10 +15,6 @@ require 'swagger_docs_generator/extractor'
 # Generator for swagger json file
 require 'swagger_docs_generator/generator'
 require 'swagger_docs_generator/metadata/metadata'
-require 'swagger_docs_generator/metadata/configuration'
-require 'swagger_docs_generator/metadata/info'
-require 'swagger_docs_generator/metadata/path'
-require 'swagger_docs_generator/metadata/tag'
 
 # Tasks
 require 'swagger_docs_generator/railtie' if defined?(Rails)

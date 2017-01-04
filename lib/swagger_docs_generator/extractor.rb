@@ -12,13 +12,14 @@ module SwaggerDocsGenerator
     end
 
     def verb
-      verb = nil
-      @routes.map do |route|
-        rte = route.defaults
-        if rte_controller(rte) && rte_action(rte)
-          verb = route.verb.source.to_s.delete('$'+'^')
-          return verb.downcase
-        end
+      router do |route|
+        route.verb.source.to_s.delete('$'+'^')
+      end
+    end
+
+    def path
+      router do |route|
+        route.path.spec.to_s.gsub('(.:format)', '.json').gsub(':id', '{id}')
       end
     end
 
@@ -34,6 +35,17 @@ module SwaggerDocsGenerator
 
     def controller_name
       @controller.controller_name
+    end
+
+    def router
+      data = nil
+      @routes.map do |route|
+        rte = route.defaults
+        if rte_controller(rte) && rte_action(rte)
+          data = yield(route, rte)
+        end
+      end
+      data.downcase
     end
   end
 end

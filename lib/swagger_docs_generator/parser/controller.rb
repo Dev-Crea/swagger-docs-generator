@@ -16,7 +16,7 @@ module SwaggerDocsGenerator
       json = JSON.parse(File.read(controller_file))
       File.open(controller_file, 'w') do |file|
         hash = construct_tags(@description)
-        control_presence(json, 'tags', hash)
+        json['tags'].merge!(hash)
         file.puts(JSON.pretty_generate(json))
       end
     end

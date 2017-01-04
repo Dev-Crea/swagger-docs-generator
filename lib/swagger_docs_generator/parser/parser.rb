@@ -29,15 +29,6 @@ module SwaggerDocsGenerator
     def controller_name
       @controller.controller_name
     end
-
-    # :reek:UtilityFunction
-    def control_presence(json, value, hash)
-      if json.values_at(value).blank?
-        json[value] = hash
-      else
-        json[value].merge!(hash)
-      end
-    end
   end
 end
 

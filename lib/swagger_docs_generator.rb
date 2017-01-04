@@ -8,6 +8,7 @@ require 'swagger_docs_generator/configuration/configuration_info'
 
 # Modules methods in a controller
 require 'swagger_docs_generator/methods'
+require 'swagger_docs_generator/parser/parser'
 
 # Extractor verb
 require 'swagger_docs_generator/extractor'

@@ -14,19 +14,19 @@ module SwaggerDocsGenerator
       @file = 'swagger.json'
       @path = File.join(Dir.pwd, '/public')
       @swagger_file = File.join(@path, @file)
+      @version = File.join(@path, SwaggerDocsGenerator.configure_info.version)
+      create_version_folder
     end
 
     # Open or create a swagger.json file
     def generate_swagger_file
       delete_file_before
-      create_version_folder
       File.open(@swagger_file, 'a+') { |file| file.puts agregate_metadata }
     end
 
     # Delete files temporary
-    def delete_emporary_files
-      version = File.join(@path, SwaggerDocsGenerator.configure_info.version)
-      Dir.delete(File.join(@path, version))
+    def delete_temporary_files
+      FileUtils.rm_rf(@version)
     end
 
     private
@@ -38,8 +38,7 @@ module SwaggerDocsGenerator
     end
 
     def create_version_folder
-      version = File.join(@path, SwaggerDocsGenerator.configure_info.version)
-      FileUtils.mkdir_p(version) unless File.directory?(version)
+      FileUtils.mkdir_p(@version) unless File.directory?(@version)
     end
 
     # :reek:UtilityFunction

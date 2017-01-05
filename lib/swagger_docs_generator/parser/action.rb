@@ -38,7 +38,9 @@ module SwaggerDocsGenerator
 
     def construct_routes
       extract = Extractor.new(controller, @action)
-      { "#{extract.path}": { "#{extract.verb}": super_hash } }
+      verb = extract.verb
+      path = extract.path
+      verb.eql?('put') ? route_update(path, verb) : route(path, verb)
     end
 
     def super_hash
@@ -51,6 +53,14 @@ module SwaggerDocsGenerator
 
     def expect_tag(klass)
       klass.eql?(Actions::Tags) ? controller_name : @data
+    end
+
+    def route(path, verb)
+      { "#{path}": { "#{verb}": super_hash } }
+    end
+
+    def route_update(path, verb)
+      { "#{path}": { "#{verb}": super_hash }.merge!(patch: super_hash) }
     end
   end
 end

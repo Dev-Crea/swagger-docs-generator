@@ -9,17 +9,10 @@ module SwaggerDocsGenerator
   # @example
   #   SwaggerDocsGenerator.configure do |config|
   #     config.swagger = '2.0.0'
-  #     config.info = {
-  #       info: {
-  #         title: 'Topisime API',
-  #         description: 'Super Topisime API for http://example.com service'
-  #       }
-  #     }
   #   end
   #
   #   SwaggerDocsGenerator.config
   #   => #<SwaggerDocsGenerator::Configuration:0x007f8ae49138d8
-  #    @info={ ...  }
   #    @swagger='2.0.0'>
   #
   # @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
@@ -28,7 +21,7 @@ module SwaggerDocsGenerator
                   :host, :paths, :definitions, :security_definitions,
                   :security, :tags, :external_docs
 
-    SWAGGER = '1.0.4'
+    SWAGGER = '2.0'
 
     # Initalize default value (and requried) for json swagger file
     def initialize

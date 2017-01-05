@@ -12,15 +12,13 @@ describe SwaggerDocsGenerator::Configuration, type: :gem,
   let(:conf) { SwaggerDocsGenerator.configure }
   let(:variable) { conf.swagger }
   it_behaves_like 'variable exist', 'swagger'
-  let(:variable) { conf.info }
-  it_behaves_like 'variable exist', 'info'
 end
 
 describe SwaggerDocsGenerator::ConfigurationInfo, type: :gem,
                                                   name: :configuration_info do
-  let(:conf) { SwaggerDocsGenerator.configure }
-  let(:variable) { conf.info.title }
+  let(:conf) { SwaggerDocsGenerator.configure_info }
+  let(:variable) { conf.title }
   it_behaves_like 'variable exist', 'title'
-  let(:variable) { conf.info.version }
+  let(:variable) { conf.version }
   it_behaves_like 'variable exist', 'version'
 end

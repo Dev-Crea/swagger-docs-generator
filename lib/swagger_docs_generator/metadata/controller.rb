@@ -9,7 +9,12 @@ module SwaggerDocsGenerator
     def initialize
       @path = File.join(Dir.pwd, 'public',
                         SwaggerDocsGenerator.configure_info.version)
-      @controllers = ApplicationController.subclasses
+      conf = SwaggerDocsGenerator.configure.base_controller
+      @controllers = if conf.is_a?(String)
+                       ApplicationController.subclasses
+                     else
+                       conf.subclasses
+                     end
     end
 
     private

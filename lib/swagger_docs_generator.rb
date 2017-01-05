@@ -1,4 +1,8 @@
 # frozen_string_literal: true
+
+# Dependencies
+require 'json'
+
 # Information for this gem
 require 'swagger_docs_generator/info'
 

@@ -27,10 +27,10 @@ module SwaggerDocsGenerator
       old_route = json['paths']
 
       keys_new = hash.keys[0]
-      keys_old = old_route.keys[0]
+      index = keys_new.to_s
 
-      if keys_new.to_s.eql?(keys_old.to_s)
-        old_route[keys_old].merge!(hash[keys_new])
+      if !old_route.blank? && old_route.keys.include?(index)
+        old_route[index].merge!(hash[keys_new])
       else
         old_route.merge!(hash)
       end

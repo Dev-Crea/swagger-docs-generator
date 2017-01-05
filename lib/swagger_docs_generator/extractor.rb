@@ -34,7 +34,7 @@ module SwaggerDocsGenerator
     end
 
     def controller_name
-      @controller.controller_name
+      @controller.controller_path
     end
 
     def router

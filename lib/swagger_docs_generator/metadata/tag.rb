@@ -15,7 +15,7 @@ module SwaggerDocsGenerator
     def construct_swagger_file
       array = []
       controllers.each do |controller|
-        file = File.join(path, "#{controller.controller_name}.json")
+        file = File.join(file_path, "#{controller.controller_name}.json")
         array.push(JSON.parse(File.read(file))['tags']) if File.exist?(file)
       end
       { tags: array }

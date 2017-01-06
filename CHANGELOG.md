@@ -11,4 +11,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Update parameters
 
 ### [Added]
+- Adding definitions for elements to request
 - Add changelog file

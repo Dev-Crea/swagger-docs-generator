@@ -15,7 +15,7 @@ module SwaggerDocsGenerator
     def construct_swagger_file
       hash = {}
       controllers.each do |controller|
-        file = File.join(path, "#{controller.controller_name}.json")
+        file = File.join(file_path, "#{controller.controller_name}.json")
         hash.merge!(JSON.parse(File.read(file))['paths']) if File.exist?(file)
       end
       { paths: hash }

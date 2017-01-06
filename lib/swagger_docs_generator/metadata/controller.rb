@@ -7,8 +7,8 @@ module SwaggerDocsGenerator
   #   Abstract class for metadata provide to controlloer in Rails application
   class MetadataController < Metadata
     def initialize
-      @path = File.join(Dir.pwd, 'public',
-                        SwaggerDocsGenerator.configure_info.version)
+      @file_path = File.join(Dir.pwd, 'public',
+                             SwaggerDocsGenerator.configure_info.version)
       conf = SwaggerDocsGenerator.configure.base_controller
       @controllers = if conf.is_a?(String)
                        ApplicationController.subclasses
@@ -19,9 +19,10 @@ module SwaggerDocsGenerator
 
     private
 
-    attr_accessor :controllers, :path
+    attr_accessor :controllers, :file_path
   end
 end
 
 require 'swagger_docs_generator/metadata/path'
 require 'swagger_docs_generator/metadata/tag'
+require 'swagger_docs_generator/metadata/definition'

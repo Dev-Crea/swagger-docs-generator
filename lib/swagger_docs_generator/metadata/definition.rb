@@ -15,21 +15,26 @@ module SwaggerDocsGenerator
     end
 
     def construct_swagger_file
-      find_models
-      {}
+      { definitions: find_models }
     end
 
     private
 
+    # :reek:NilCheck
     def find_models
+      hash = {}
       controllers.each do |controller|
-        begin
-          @model = Model.new(controller)
-          p contruct_hash
-        rescue NameError => message
-          puts "Error model name : #{message.name}"
-        end
+        data = each_controller(controller)
+        hash.merge!(data) unless data.nil?
       end
+      hash
+    end
+
+    def each_controller(controller)
+      @model = Model.new(controller)
+      contruct_hash
+    rescue NameError => message
+      puts "Error model name : #{message.name}"
     end
 
     def contruct_hash

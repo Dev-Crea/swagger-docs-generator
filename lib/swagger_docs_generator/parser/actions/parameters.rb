@@ -32,8 +32,8 @@ module SwaggerDocsGenerator
       end
 
       def write_param(param)
-        hash = param[0].eql?('body') ? body(param) : classic(param)
-        type_or_schema = params[5]
+        hash = param_name(param).eql?('body') ? body(param) : classic(param)
+        type_or_schema = param[5]
         hash.merge!(type_or_schema) if type_or_schema.present?
         hash
       end

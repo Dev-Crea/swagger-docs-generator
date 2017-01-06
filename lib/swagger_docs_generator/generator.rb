@@ -25,8 +25,9 @@ module SwaggerDocsGenerator
     end
 
     # Delete files temporary
+    # @todo necessary ?
     def delete_temporary_files
-      FileUtils.rm_rf(@version)
+      # FileUtils.rm_rf(@version)
     end
 
     private

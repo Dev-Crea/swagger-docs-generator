@@ -11,10 +11,10 @@ module SwaggerDocsGenerator
     attr_reader :swagger_file
 
     def initialize
+      @hash = {}
       @file = 'swagger.json'
-      @path = File.join(Dir.pwd, '/public')
-      @swagger_file = File.join(@path, @file)
-      @version = File.join(@path, SwaggerDocsGenerator.configure_info.version)
+      @swagger_file = File.join(path, @file)
+      @version = File.join(path, SwaggerDocsGenerator.configure_info.version)
       create_version_folder
     end
 
@@ -34,6 +34,11 @@ module SwaggerDocsGenerator
 
     attr_reader :meta
 
+    # :reek:UtilityFunction
+    def path
+      File.join(Dir.pwd, '/public')
+    end
+
     def delete_file_before
       File.delete(@swagger_file) if File.exist?(@swagger_file)
     end
@@ -42,13 +47,24 @@ module SwaggerDocsGenerator
       FileUtils.mkdir_p(@version) unless File.directory?(@version)
     end
 
-    # :reek:UtilityFunction
     def write_in_swagger_file
-      hash = {}
-      hash.merge!(MetadataConfiguration.new.construct_swagger_file)
-      hash.merge!(MetadataInfo.new.construct_swagger_file)
-      hash.merge!(MetadataPath.new.construct_swagger_file)
-      hash.merge!(MetadataTag.new.construct_swagger_file)
+      write_in_swagger_file_configurations
+      write_in_swagger_file_controllers
+      write_in_swagger_file_models
+    end
+
+    def write_in_swagger_file_configurations
+      @hash.merge!(MetadataConfiguration.new.construct_swagger_file)
+      @hash.merge!(MetadataInfo.new.construct_swagger_file)
+    end
+
+    def write_in_swagger_file_controllers
+      @hash.merge!(MetadataPath.new.construct_swagger_file)
+      @hash.merge!(MetadataTag.new.construct_swagger_file)
+    end
+
+    def write_in_swagger_file_models
+      @hash.merge!(MetadataDefinition.new.construct_swagger_file)
     end
 
     def agregate_metadata

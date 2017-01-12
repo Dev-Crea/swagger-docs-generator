@@ -5,6 +5,24 @@ module SwaggerDocsGenerator
   # # Parse Mongo model
   class ModelMongo
     NAME = :mongo
+    TYPES = {
+      'Array' =>            { type: 'string' },
+      'BigDecimal' =>       { type: 'number', format: 'double' },
+      'Mongoid::Boolean' => { type: 'boolean' },
+      'Date' =>             { type: 'string', format: 'date' },
+      'DateTime' =>         { type: 'string', format: 'date-time' },
+      'Float' =>            { type: 'number', format: 'float' },
+      'Hash' =>             { type: 'string' },
+      'Integer' =>          { type: 'integer', format: 'int64' },
+      'BSON::ObjectId' =>   { type: 'string' },
+      'Object' =>           { type: 'string' },
+      'BSON::Binary' =>     { type: 'string', format: 'binary' },
+      'Range' =>            { type: 'string' },
+      'String' =>           { type: 'string' },
+      'Symbol' =>           { type: 'string' },
+      'Time' =>             { type: 'string', format: 'date-time' },
+      'TimeWithZone' =>     { type: 'string', format: 'date-time' }
+    }.freeze
 
     def initialize(model)
       @model = eval(model)
@@ -21,7 +39,9 @@ module SwaggerDocsGenerator
     private
 
     def attribute_propertie(name)
-      { name => { type: @model.fields[name].type } }
+      {
+        name => TYPES.fetch(@model.fields[name].type.to_s)
+      }
     end
   end
 end

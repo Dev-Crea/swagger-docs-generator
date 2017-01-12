@@ -32,7 +32,12 @@ module SwaggerDocsGenerator
       end
 
       def write_param(param)
-        hash = param_name(param).eql?('body') ? body(param) : classic(param)
+        hash = case param_in(param)
+               when 'body'
+                 body(param)
+               else
+                 classic(param)
+               end
         type_or_schema = param[5]
         hash.merge!(type_or_schema) if type_or_schema.present?
         hash
@@ -53,7 +58,7 @@ module SwaggerDocsGenerator
           name: param_name(param),
           in: param_in(param),
           description: param_description(param),
-          schema: param_schema(param),
+          schema: { '$ref': param_schema(param) },
           required: param_required(param)
         }
       end

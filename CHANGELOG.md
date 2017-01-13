@@ -17,3 +17,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### [Added]
 - Adding definitions for elements to request
 - Add changelog file
+- Add response with schema (with type or not)

@@ -5,6 +5,9 @@ module SwaggerDocsGenerator
   #
   # Metadata generated in swagger json file
   class Metadata
+    ACCEPT = %i(title version contact description host schemes base_path
+                swagger).freeze
+
     def initialize
       @config = nil
     end
@@ -12,7 +15,9 @@ module SwaggerDocsGenerator
     def construct_swagger_file
       hash = {}
       self.class.protected_instance_methods.each do |method|
-        hash.merge!(send(method)) unless @config.send(method).blank?
+        if ACCEPT.include?(method) || method.is_a?(Hash)
+          hash.merge!(send(method)) unless @config.send(method).blank?
+        end
       end
       hash
     end

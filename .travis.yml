@@ -24,6 +24,7 @@ deploy:
   on:
     repo: Dev-Crea/swagger-docs-generator
     all_branches: true
+  skip_cleanup: true
 
 notifications:
   email: false

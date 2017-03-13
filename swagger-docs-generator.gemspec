@@ -1,12 +1,19 @@
+# frozen_string_literal: true
 # coding: utf-8
+
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'swagger_docs_generator/info'
 
 Gem::Specification.new do |spec|
+  version = SwaggerDocsGenerator::VERSION
+  spec.version       = if ENV['TRAVIS'] && !ENV['TRAVIS_BRANCH'].eql?('master')
+                         "#{version}-#{ENV['TRAVIS_BUILD_NUMBER']}"
+                       else
+                         version
+                       end
   spec.name          = SwaggerDocsGenerator::GEM
-  spec.version       = SwaggerDocsGenerator::VERSION
   spec.authors       = SwaggerDocsGenerator::AUTHORS
   spec.email         = SwaggerDocsGenerator::EMAILS
   spec.license       = SwaggerDocsGenerator::LICENSE
@@ -17,6 +24,7 @@ Gem::Specification.new do |spec|
 
   spec.files         = ['Gemfile', 'LICENSE', 'Rakefile', 'README.md']
   spec.files         += Dir['lib/**/*']
+  spec.files         += Dir['spec/**/*']
 
   spec.require_paths = ['lib']
 
@@ -28,6 +36,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'reek', '~> 4.2', '>= 4.2.4'
   spec.add_development_dependency 'pry-byebug', '~> 3.4'
   spec.add_development_dependency 'json-schema-rspec', '~> 0.0.4'
-
-  spec.add_runtime_dependency 'rake', '~> 12.0'
 end

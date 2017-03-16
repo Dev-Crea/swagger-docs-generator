@@ -7,3 +7,5 @@ PreCommit:
     enabled: true
   TravisLint:
     enabled: true
+  Mdl:
+    enabled: true

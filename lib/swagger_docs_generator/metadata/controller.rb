@@ -10,10 +10,10 @@ module SwaggerDocsGenerator
       @file_path = File.join(Dir.pwd, 'public',
                              SwaggerDocsGenerator.configure_info.version)
       conf = SwaggerDocsGenerator.configure.base_controller
-      @controllers = if conf.is_a?(String)
-                       ApplicationController.subclasses
-                     else
-                       conf.subclasses
+      @controllers = case conf
+                     when String then ApplicationController.subclasses
+                     when Array then conf.each(&:subclasses)
+                     else conf.subclasses
                      end
     end
 

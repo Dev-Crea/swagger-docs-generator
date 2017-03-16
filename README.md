@@ -1,4 +1,4 @@
-# Swagger::Docs::Generator | [![Build Status](https://travis-ci.org/Dev-Crea/swagger-docs-generator.svg?branch=master)](https://travis-ci.org/Dev-Crea/swagger-docs-generator) [![Gem Version](https://badge.fury.io/rb/swagger_docs_generator.svg)](https://badge.fury.io/rb/swagger_docs_generator) [![Inline docs](https://inch-ci.org/github/Dev-Crea/swagger-docs-generator.svg)](https://inch-ci.org/github/Dev-Crea/swagger-docs-generator)
+# Swagger::Docs::Generator | [![Travis][1]][2] [![Gem][21]][22] [![Docs][11]][12]
 
 Generator for Swagger Apps ([Example with theme](https://github.com/Dev-Crea/swagger-ui))
 
@@ -9,7 +9,6 @@ Generator for Swagger Apps ([Example with theme](https://github.com/Dev-Crea/swa
   * [Usage](#usage)
 * [Development](#development)
 * [Contributing](#contributing)
-
 
 ## How to use
 
@@ -24,13 +23,13 @@ gem 'swagger-docs-generator'
 And then execute :
 
 ```linux
-$ bundle
+bundle
 ```
 
 Or install it yourself as :
 
 ```linux
-$ gem install swagger-docs-generator
+gem install swagger_docs_generator
 ```
 
 ### Usage
@@ -62,7 +61,16 @@ push git commits and tags, and push the `.gem` file to
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at
-https://github.com/Dev-Crea/swagger-docs-generator. This project is intended to
+<https://github.com/Dev-Crea/swagger-docs-generator>. This project is intended to
 be a safe, welcoming space for collaboration, and contributors are expected to
 adhere to the [Contributor Covenant](http://contributor-covenant.org)
 code of conduct.
+
+[1]: https://travis-ci.org/Dev-Crea/swagger-docs-generator.svg?branch=master
+[2]: https://travis-ci.org/Dev-Crea/swagger-docs-generator
+
+[11]: https://badge.fury.io/rb/swagger_docs_generator.svg
+[12]: https://badge.fury.io/rb/swagger_docs_generator
+
+[21]: https://inch-ci.org/github/Dev-Crea/swagger-docs-generator.svg
+[22]: https://inch-ci.org/github/Dev-Crea/swagger-docs-generator

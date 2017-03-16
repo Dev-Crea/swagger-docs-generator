@@ -3,3 +3,7 @@ PreCommit:
     enabled: true
   Reek:
     enabled: true
+  YamlSyntax:
+    enabled: true
+  TravisLint:
+    enabled: true

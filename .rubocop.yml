@@ -1,6 +1,6 @@
 AllCops:
   Exclude:
-    - 'bin/**/*'
+    - bin/**/*
   TargetRubyVersion: 2.3
 
 Metrics/LineLength:
@@ -8,5 +8,5 @@ Metrics/LineLength:
 
 Metrics/BlockLength:
   Exclude:
-    - 'spec/**/*'
-    - 'evostream-event.gemspec'
+    - spec/**/*
+    - swagger_docs_generator.gemspec

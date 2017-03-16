@@ -9,17 +9,32 @@ module SwaggerDocsGenerator
     def initialize
       @file_path = File.join(Dir.pwd, 'public',
                              SwaggerDocsGenerator.configure_info.version)
-      conf = SwaggerDocsGenerator.configure.base_controller
-      @controllers = case conf
-                     when String then ApplicationController.subclasses
-                     when Array then conf.each(&:subclasses)
-                     else conf.subclasses
+      @conf = SwaggerDocsGenerator.configure.base_controller
+      @controllers = case @conf
+                     when String then string_controller
+                     when Array then array_controller
+                     when Class then class_controller
                      end
     end
 
     private
 
     attr_accessor :controllers, :file_path
+
+    # :reek:UtilityFunction
+    def string_controller
+      ApplicationController.subclasses
+    end
+
+    def array_controller
+      array = []
+      @conf.map { |controller| array |= controller.subclasses }
+      array
+    end
+
+    def class_controller
+      @conf.subclasses
+    end
   end
 end
 

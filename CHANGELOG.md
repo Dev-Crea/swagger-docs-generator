@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Configure travis for deployement
 - Write info in task execution
 - Option cleanning temporary file
+- Base Controller array
 
 ### [Fix]
 - Delete temporary file

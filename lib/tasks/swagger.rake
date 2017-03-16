@@ -12,9 +12,11 @@ namespace :swagger do
     Rails.application.eager_load!
 
     # Generates files
+    puts
     puts 'Generate doc file :'
     swag.generate_swagger_file
 
+    puts
     puts 'Delete temporary file :'
     puts swag.info_swagger_temporary
     swag.delete_temporary_files

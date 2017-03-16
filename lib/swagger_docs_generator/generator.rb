@@ -26,7 +26,7 @@ module SwaggerDocsGenerator
 
     # Delete files temporary
     def delete_temporary_files
-      FileUtils.remove_dir(@version)
+      FileUtils.remove_dir(@version) if SwaggerDocsGenerator.configure.cleanning
     end
 
     def info_swagger_file

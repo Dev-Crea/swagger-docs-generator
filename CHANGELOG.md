@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### [Added]
 - Configure travis for deployement
 - Write info in task execution
+- Option cleanning temporary file
 
 ### [Fix]
 - Delete temporary file

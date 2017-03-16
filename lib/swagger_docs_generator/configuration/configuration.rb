@@ -19,14 +19,16 @@ module SwaggerDocsGenerator
   class Configuration
     attr_accessor :swagger, :base_path, :schemes, :consumes, :produces,
                   :host, :paths, :definitions, :security_definitions,
-                  :security, :tags, :external_docs, :base_controller
+                  :security, :tags, :external_docs, :base_controller, :cleanning
 
     SWAGGER = '2.0'
+    CLEANNING = true
 
     # Initalize default value (and requried) for json swagger file
     def initialize
       @swagger = SWAGGER
       @base_controller = ''
+      @cleanning = CLEANNING
     end
   end
 

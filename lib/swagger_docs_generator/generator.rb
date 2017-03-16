@@ -25,14 +25,29 @@ module SwaggerDocsGenerator
     end
 
     # Delete files temporary
-    # @todo necessary ?
     def delete_temporary_files
-      # FileUtils.rm_rf(@version)
+      FileUtils.remove_dir(@version)
+    end
+
+    def info_swagger_file
+      create_info_text(@swagger_file)
+    end
+
+    def info_swagger_temporary
+      create_info_text(@version)
     end
 
     private
 
     attr_reader :meta
+
+    def prefix_info
+      '->'
+    end
+
+    def create_info_text(message)
+      "#{prefix_info} #{message}"
+    end
 
     # :reek:UtilityFunction
     def path

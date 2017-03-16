@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.2.0] - 2017-03-13
 ### [Added]
 - Configure travis for deployement
+- Write info in task execution
+
+### [Fix]
+- Delete temporary file
 
 ## [0.1.2] - 2017-03-09
 ### [Fix]

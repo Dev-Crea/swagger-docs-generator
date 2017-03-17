@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Write info in task execution
 - Option cleanning temporary file
 - Base Controller array
+- Add alias sdoc for swagger_doc
+- Add alias scontroller for swagger_controller
 
 ### [Fix]
 - Delete temporary file

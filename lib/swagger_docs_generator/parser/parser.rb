@@ -34,3 +34,4 @@ end
 
 require 'swagger_docs_generator/parser/controller'
 require 'swagger_docs_generator/parser/action'
+require 'swagger_docs_generator/parser/definition'

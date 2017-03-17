@@ -15,10 +15,14 @@ module SwaggerDocsGenerator
     end
 
     def construct_swagger_file
-      { definitions: find_models }
+      { definitions: search_definition }
     end
 
     private
+
+    def search_definition
+      find_models.merge!(find_in_controller)
+    end
 
     # :reek:NilCheck
     def find_models
@@ -28,6 +32,21 @@ module SwaggerDocsGenerator
         hash.merge!(data) unless data.nil?
       end
       hash
+    end
+
+    def find_in_controller
+      hash = {}
+      controllers.each do |controller|
+        file = File.join(file_path, "#{controller.controller_name}.json")
+        hash.merge!(read_file(file)) if File.exist?(file)
+      end
+      hash
+    end
+
+    # :reek:UtilityFunction
+    def read_file(file)
+      json = JSON.parse(File.read(file))
+      json.key?('definitions') ? json['definitions'] : {}
     end
 
     def each_controller(controller)

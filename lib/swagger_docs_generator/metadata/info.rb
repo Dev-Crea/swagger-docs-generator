@@ -30,7 +30,7 @@ module SwaggerDocsGenerator
     end
 
     def terms_of_service
-      { terms_of_service: @config.terms_of_service }
+      { termsOfService: @config.terms_of_service }
     end
 
     def contact

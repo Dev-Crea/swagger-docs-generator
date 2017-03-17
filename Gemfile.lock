@@ -214,6 +214,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport (~> 4.2)
   bundler (~> 1.13)
   faker (~> 1.7, >= 1.7.3)
   json-schema-rspec (~> 0.0.4)

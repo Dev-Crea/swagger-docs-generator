@@ -21,9 +21,10 @@ module SwaggerDocsGenerator
     attr_accessor :swagger, :cleanning, :base_controller, :base_path
 
     # Accessors without default value
-    attr_accessor :schemes, :consumes, :produces, :host
+    attr_accessor :schemes, :consumes, :produces, :host, :external_docs,
+                  :security, :definitions
     # :external_docs, :security_definitions, :security
-    # :paths, :definitions, :tags, :host
+    # :paths, :tags, :host
 
     # Initalize default value (and requried) for json swagger file
     def initialize

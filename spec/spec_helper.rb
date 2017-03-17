@@ -2,9 +2,11 @@
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
+require 'rails'
 require 'bundler/setup'
 require 'swagger_docs_generator'
 require 'json-schema-rspec'
+require 'pry'
 
 Dir['spec/supporrt/**/*.rb'].each do |f|
   require File.expand_path(f)

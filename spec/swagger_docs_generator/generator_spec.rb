@@ -4,7 +4,8 @@ require 'spec_helper'
 require 'support/examples/generator'
 
 describe SwaggerDocsGenerator::Generator, type: :gem,
-                                          name: :generator, broken: true do
+                                          broken: true,
+                                          name: :generator do
   before(:context) do
     @swag = SwaggerDocsGenerator::Generator.new
     @swagger_file = @swag.swagger_file

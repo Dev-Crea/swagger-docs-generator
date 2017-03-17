@@ -11,13 +11,10 @@ module SwaggerDocsGenerator
     attr_accessor :title, :description, :terms_of_service, :contact, :license,
                   :version
 
-    TITLE = 'Title Example API'
-    VERSION = '1.0.0'
-
     # Initialize required element
     def initialize
-      @title = TITLE
-      @version = VERSION
+      @title = 'Title Example API'
+      @version = '1.0.0'
     end
   end
 

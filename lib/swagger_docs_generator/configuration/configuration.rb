@@ -17,18 +17,20 @@ module SwaggerDocsGenerator
   #
   # @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
   class Configuration
-    attr_accessor :swagger, :base_path, :schemes, :consumes, :produces,
-                  :host, :paths, :definitions, :security_definitions,
-                  :security, :tags, :external_docs, :base_controller, :cleanning
+    # Accessors with default value
+    attr_accessor :swagger, :cleanning, :base_controller, :base_path
 
-    SWAGGER = '2.0'
-    CLEANNING = true
+    # Accessors without default value
+    attr_accessor :schemes, :consumes, :produces, :host
+    # :external_docs, :security_definitions, :security
+    # :paths, :definitions, :tags, :host
 
     # Initalize default value (and requried) for json swagger file
     def initialize
-      @swagger = SWAGGER
+      @swagger = '2.0'
       @base_controller = ''
-      @cleanning = CLEANNING
+      @base_path = '/'
+      @cleanning = true
     end
   end
 

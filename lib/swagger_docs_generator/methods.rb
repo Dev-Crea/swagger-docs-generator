@@ -18,7 +18,13 @@ module SwaggerDocsGenerator
       parse.adding_path
     end
 
+    def swagger_definition(controller, name, parameters)
+      parse = ParserDefinition.new(controller, name, parameters)
+      parse.adding_defintion
+    end
+
     alias scontroller swagger_controller
     alias sdoc swagger_doc
+    alias sdefinition swagger_definition
   end
 end

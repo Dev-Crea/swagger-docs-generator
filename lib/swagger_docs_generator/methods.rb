@@ -17,5 +17,8 @@ module SwaggerDocsGenerator
       parse = ParserAction.new(controller, action, data)
       parse.adding_path
     end
+
+    alias scontroller swagger_controller
+    alias sdoc swagger_doc
   end
 end

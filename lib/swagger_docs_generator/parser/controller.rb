@@ -15,8 +15,7 @@ module SwaggerDocsGenerator
     def adding_tag
       json = JSON.parse(File.read(controller_file))
       File.open(controller_file, 'w') do |file|
-        hash = construct_tags(@description)
-        json['tags'].merge!(hash)
+        json['tags'].merge!(construct_tags)
         file.puts(JSON.pretty_generate(json))
       end
     end
@@ -33,8 +32,8 @@ module SwaggerDocsGenerator
       File.delete(controller_file) if File.exist?(controller_file)
     end
 
-    def construct_tags(description)
-      { name: controller_name, description: description }
+    def construct_tags
+      { name: controller_name, description: @description }
     end
   end
 end

@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Base Controller array
 - Add alias sdoc for swagger_doc
 - Add alias scontroller for swagger_controller
+- Add definition parser/metadata
 
 ### [Fix]
 - Delete temporary file

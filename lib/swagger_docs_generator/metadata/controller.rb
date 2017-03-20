@@ -28,12 +28,18 @@ module SwaggerDocsGenerator
 
     def array_controller
       array = []
-      @conf.map { |controller| array |= controller.subclasses }
+      @conf.map { |controller| array |= search_subclasses(controller) }
       array
     end
 
     def class_controller
-      @conf.subclasses
+      search_subclasses(@conf.subclasses)
+    end
+
+    # :reek:UtilityFunction
+    def search_subclasses(controller)
+      ctrl = controller.subclasses
+      ctrl.count.zero? ? [controller] : ctrl
     end
   end
 end

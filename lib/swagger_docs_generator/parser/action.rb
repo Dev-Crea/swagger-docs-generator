@@ -51,6 +51,7 @@ module SwaggerDocsGenerator
       element.merge!(description: @description)   if @description.present?
       element.merge!(parameters: @parameter)      if @parameter.present?
       element.merge!(consumes: @consume)          if @consume.present?
+      element.merge!(deprecated: @deprecated)     if @deprecated.present?
       element.merge!(produces: @produce)          if @produce.present?
       element.merge!(responses: @response)
       element.merge!(tags: @tag || default_tag)
@@ -78,6 +79,10 @@ module SwaggerDocsGenerator
 
     def produces(text)
       @produce = text
+    end
+
+    def deprecated(value)
+      @deprecated = value
     end
 
     def responses(&block)

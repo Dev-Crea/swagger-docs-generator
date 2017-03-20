@@ -2,6 +2,7 @@
 
 # Dependencies
 require 'json'
+require 'binding_of_callers'
 
 # Information for this gem
 require 'swagger_docs_generator/info'

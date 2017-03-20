@@ -15,11 +15,7 @@ module SwaggerDocsGenerator
     def adding_defintion
       json = JSON.parse(File.read(controller_file))
       File.open(controller_file, 'w') do |file|
-        if json.key?('definitions')
-          json['definitions'].merge!(construct_definition)
-        else
-          json['definitions'] = construct_definition
-        end
+        json['definitions'].merge!(construct_definition)
         file.puts(JSON.pretty_generate(json))
       end
     end

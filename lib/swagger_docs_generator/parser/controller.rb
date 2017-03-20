@@ -24,7 +24,7 @@ module SwaggerDocsGenerator
 
     def prepare_file
       delete_file
-      base_file = { paths: {}, tags: {} }
+      base_file = { paths: {}, tags: {}, definitions: {} }
       File.open(controller_file, 'a+') { |file| file.puts(base_file.to_json) }
     end
 

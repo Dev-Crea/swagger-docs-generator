@@ -9,15 +9,17 @@ module SwaggerDocsGenerator
     INITIALIZER = <<-INIT
 # frozen_string_literal: true
 
-SwaggerDocsGenerator.configure do |config|
-  config.swagger = '2.2.4'
-  config.base_path = '/'
-  config.host = 'localhost:3000'
-end
+if Rails.env.doc?
+  SwaggerDocsGenerator.configure do |config|
+    config.swagger = '2.2.4'        # Swagger version used
+    config.base_path = '/'          # Base to API
+    config.host = 'localhost:3000'  # Host api
+  end
 
-SwaggerDocsGenerator.configure_info do |info|
-  info.title = 'API example.com'
-  info.version = '1.0.0'
+  SwaggerDocsGenerator.configure_info do |info|
+    info.title = 'API example.com'  # Title to API
+    info.version = 'v1'             # Version to API
+  end
 end
     INIT
 

@@ -6,8 +6,8 @@ module SwaggerDocsGenerator
   # Parse controller classes in Rails application. It's create temporary file
   # and adding automaticaly tags element.
   class ParserController < Parser
-    def initialize(controller, description)
-      super(controller)
+    def initialize(description)
+      super(binding.of_callers[1].klass::CONTROLLER)
       prepare_file
       @description = description
     end

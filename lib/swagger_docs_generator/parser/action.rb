@@ -6,15 +6,18 @@ module SwaggerDocsGenerator
   # # Parse action in controller classe to Rails application. It's adding
   # paths to swagger docs file.
   class ParserAction < Parser
-    def initialize(controller, action, data)
-      super(controller)
+    def initialize(action, &block)
+      super(binding.of_callers[1].klass::CONTROLLER)
       @action = action
-      @data = data
+      @parameter = []
+      @response = {}
+      instance_eval(&block)
     end
 
     def adding_path
       json = JSON.parse(File.read(controller_file))
       File.open(controller_file, 'w') do |file|
+        # json['paths'].merge!(construct_routes(json))
         path_exist(json, construct_routes)
         file.puts(JSON.pretty_generate(json))
       end
@@ -22,7 +25,6 @@ module SwaggerDocsGenerator
 
     private
 
-    # :reek:UtilityFunction
     def path_exist(json, hash)
       old_route = json['paths']
 
@@ -38,29 +40,58 @@ module SwaggerDocsGenerator
 
     def construct_routes
       extract = Extractor.new(controller, @action)
-      verb = extract.verb
-      path = extract.path
-      verb.eql?('put') ? route_update(path, verb) : route(path, verb)
+      @verb = extract.verb
+      @route = extract.path
+      @verb.eql?('put') ? route_update : route
     end
 
-    def super_hash
-      hash = {}
-      SwaggerDocsGenerator::Actions::Actions.descendants.each do |klass|
-        hash.merge!(klass.new(expect_tag(klass)).hash)
-      end
-      hash
+    def construct_path
+      element = {}
+      element.merge!(summary: @summary)           if @summary.present?
+      element.merge!(description: @description)   if @description.present?
+      element.merge!(parameters: @parameter)      if @parameter.present?
+      element.merge!(consumes: @consume)          if @consume.present?
+      element.merge!(produces: @produce)          if @produce.present?
+      element.merge!(responses: @response)
+      element.merge!(tags: @tag || default_tag)
     end
 
-    def expect_tag(klass)
-      klass.eql?(Actions::Tags) ? controller_name : @data
+    def route
+      { @route => { @verb => construct_path } }
     end
 
-    def route(path, verb)
-      { "#{path}": { "#{verb}": super_hash } }
+    def route_update
+      { @route => { @verb => construct_path }.merge!(patch: construct_path) }
     end
 
-    def route_update(path, verb)
-      { "#{path}": { "#{verb}": super_hash }.merge!(patch: super_hash) }
+    def default_tag
+      [controller_name]
+    end
+
+    def summary(text)
+      @summary = text
+    end
+
+    def consumes(text)
+      @consume = text
+    end
+
+    def produces(text)
+      @produce = text
+    end
+
+    def responses(&block)
+      rep = SwaggerDocsGenerator::Actions::Response.new(&block)
+      @response.merge!(rep.to_hash)
+    end
+
+    def parameters(&block)
+      param = SwaggerDocsGenerator::Actions::Parameter.new(&block)
+      @parameter.push(param.to_hash)
+    end
+
+    def description(text)
+      @description = text
     end
   end
 end

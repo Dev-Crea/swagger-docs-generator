@@ -6,85 +6,89 @@ module SwaggerDocsGenerator
     # # Test :parameters
     #
     # Complete parameters field for action
-    class Parameters < Actions
-      VALUE = :parameters
+    class Parameter
+      def initialize(&block)
+        instance_eval(&block) if block_given?
+      end
 
-      def initialize(data)
-        super(VALUE)
-        complete_hash(data) if data[VALUE].present?
+      def to_hash
+        case @in
+        when :path then path_hash
+        when :header then header_hash
+        when :query then query_hash
+        when :body then body_hash
+        when :form then form_hash
+        end
       end
 
       private
 
-      # name:             0
-      # in:               1 -- [query, header, path, formData, body]
-      # description:      2
-      # type: || schema:  3 -- [string, number, integer, boolean, array, file]
-      # required:         4
-      # other:            5
-      def complete_hash(data)
-        all_parameters = []
-        raw ||= data[key]
-        raw.each do |parameter|
-          all_parameters.push(write_param(parameter))
-        end
-        hash[key] = all_parameters
+      def path(data)
+        @in = :path
+        @name = data[0]
+        @description = data[1]
+        @type = data[2]
+        @required = data[3]
       end
 
-      def write_param(param)
-        hash = case param_in(param)
-               when 'body'
-                 body(param)
-               else
-                 classic(param)
-               end
-        type_or_schema = param[5]
-        hash.merge!(type_or_schema) if type_or_schema.present?
-        hash
-      end
-
-      def classic(param)
+      def path_hash
         {
-          name: param_name(param),
-          in: param_in(param),
-          description: param_description(param),
-          type: param_type(param),
-          required: param_required(param)
+          name: @name,
+          in: @in,
+          description: @description,
+          required: @required,
+          type: @type
         }
       end
 
-      def body(param)
+      def header(data)
+        @in = :header
+        @name = data[0]
+        @description = data[1]
+        @type = data[2]
+        @required = data[3]
+        @enum = data[4]
+      end
+
+      def header_hash
         {
-          name: param_name(param),
-          in: param_in(param),
-          description: param_description(param),
-          schema: { '$ref': param_schema(param) },
-          required: param_required(param)
+          name: @name,
+          in: @in,
+          description: @description,
+          required: @required,
+          type: @type,
+          enum: @enum
         }
       end
 
-      def param_name(param)
-        param[0].to_s
+      def query(data)
+        @in = :query
       end
 
-      def param_in(param)
-        param[1].to_s.camelize(:lower)
+      alias query_hash path_hash
+
+      def body(data)
+        @in = :body
+        @name = data[1]
+        @description = data[0]
+        @definition = data[1]
       end
 
-      def param_description(param)
-        param[2].humanize
+      def body_hash
+        {
+          name: @name,
+          in: @in,
+          description: @description,
+          required: true,
+          schema: { type: :object, items: { '$ref': @definition.tr(' ', '_').camelize } }
+        }
       end
 
-      def param_type(param)
-        param[3]
+      def form(data)
+        @in = :form
       end
 
-      def param_required(param)
-        param[4] || false
-      end
-
-      def param_schema(param)
-        param[3]
+      def form_hash
       end
     end
   end

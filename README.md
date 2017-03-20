@@ -40,6 +40,12 @@ Create initializer :
 rails generator swagger_docs_generator:initializer
 ```
 
+Create environment :
+
+```linux
+rails generator swagger_docs_generator:environment
+```
+
 Execute rake task for generated `swagger.json` :
 
 ```linux

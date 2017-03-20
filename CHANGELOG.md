@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add alias sdoc for swagger_doc
 - Add alias scontroller for swagger_controller
 - Add definition parser/metadata
+- Add Environment for generated docs
+
+### [Changed]
+- Add environment generator
 
 ### [Fix]
 - Delete temporary file

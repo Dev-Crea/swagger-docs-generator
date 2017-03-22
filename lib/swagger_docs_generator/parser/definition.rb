@@ -40,10 +40,11 @@ module SwaggerDocsGenerator
     end
 
     def construct
-      element = {}
-      element[:type] = @type || 'object'
-      element[:required] = @required       if @required.present?
-      element[:properties] = @properties   if @properties.present?
+      {
+        type: @type || 'object',
+        required: @required || [],
+        properties: @properties
+      }
     end
 
     def format_name

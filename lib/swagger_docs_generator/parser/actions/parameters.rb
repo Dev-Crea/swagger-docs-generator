@@ -12,20 +12,37 @@ module SwaggerDocsGenerator
     # Complete parameters field for action
     class Parameter
       def initialize(&block)
+        @param = nil
         instance_eval(&block) if block_given?
       end
 
       def to_hash
-        case @in
-        when :path then path_hash
-        when :header then header_hash
-        when :query then query_hash
-        when :body then body_hash
-        when :form then form_hash
+        if @param.nil?
+          case @in
+          when :path then path_hash
+          when :header then header_hash
+          when :query then query_hash
+          when :form then form_hash
+          end
+        else
+          @param.to_hash
         end
       end
 
       private
+
+      def name(text)
+        @name = text
+      end
+
+      def description(text)
+        @description = text
+      end
+
+      def required(text)
+        @required = text
+      end
+
 
       def path(data)
         @in = :path
@@ -72,23 +89,8 @@ module SwaggerDocsGenerator
 
       alias query_hash path_hash
 
-      def body(data)
-        @in = :body
-        @name = data[1]
-        @description = data[0]
-        @definition = data[1]
-      end
-
-      def body_hash
-        {
-          name: @name,
-          in: @in,
-          description: @description,
-          required: true,
-          schema: {
-            type: :object, items: { '$ref': @definition.tr(' ', '_').camelize }
-          }
-        }
+      def body(&block)
+        @param = Body.new(&block)
       end
 
       def form(data)
@@ -102,3 +104,5 @@ module SwaggerDocsGenerator
     end
   end
 end
+
+require 'swagger_docs_generator/parser/actions/parameters/body'

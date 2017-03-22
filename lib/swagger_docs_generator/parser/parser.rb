@@ -7,12 +7,10 @@ module SwaggerDocsGenerator
   #
   # @!attribute [r] controller
   #   It's a name of controller parsed
-  # @!attribute [r] path
-  #   It's a path to temporary file
-  # @!attribute [r] version
-  #   It's a version to API documentation parsed
+  # @!attribute [r] tag_name
+  #   It's a tag attaching to controller
   class Parser
-    attr_reader :controller, :path, :version
+    attr_reader :controller, :tag_name
 
     def initialize(klass)
       @controller = klass::CONTROLLER

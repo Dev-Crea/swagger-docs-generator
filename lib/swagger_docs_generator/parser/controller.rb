@@ -13,8 +13,8 @@ module SwaggerDocsGenerator
     end
 
     def adding_tag
-      json = JSON.parse(File.read(controller_file))
-      File.open(controller_file, 'w') do |file|
+      json = JSON.parse(File.read(temporary_file))
+      File.open(temporary_file, 'w') do |file|
         json['tags'].merge!(construct_tags)
         file.puts(JSON.pretty_generate(json))
       end
@@ -25,11 +25,11 @@ module SwaggerDocsGenerator
     def prepare_file
       delete_file
       base_file = { paths: {}, tags: {}, definitions: {} }
-      File.open(controller_file, 'a+') { |file| file.puts(base_file.to_json) }
+      File.open(temporary_file, 'a+') { |file| file.puts(base_file.to_json) }
     end
 
     def delete_file
-      File.delete(controller_file) if File.exist?(controller_file)
+      File.delete(temporary_file) if File.exist?(temporary_file)
     end
 
     def construct_tags

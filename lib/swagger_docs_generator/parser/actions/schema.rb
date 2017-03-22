@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+# :reek:InstanceVariableAssumption
 module SwaggerDocsGenerator
   module Actions
+    # Object Schema
+    #
+    # Parse repsonse and create schema swagger object
     class Schema
       def initialize(&block)
         instance_eval(&block) if block_given?

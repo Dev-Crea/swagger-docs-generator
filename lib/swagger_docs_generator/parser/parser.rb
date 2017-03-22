@@ -16,18 +16,20 @@ module SwaggerDocsGenerator
 
     def initialize(controller)
       @controller = controller
-      @path = File.join(Dir.pwd, 'public')
-      @version = SwaggerDocsGenerator.configure_info.version
     end
 
-    def controller_file
-      File.join(@path, @version, "#{controller_name}.json")
+    def temporary_file
+      File.join(SwaggerDocsGenerator.temporary_folder, controller_json)
     end
 
     private
 
     def controller_name
       @controller.controller_name
+    end
+
+    def controller_json
+      "#{controller_name}.json"
     end
   end
 end

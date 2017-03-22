@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 # :reek:UtilityFunction
+# :reek:InstanceVariableAssumption
+# :reek:TooManyInstanceVariables
+# :reek:DuplicateMethodCall
+# :reek:TooManyStatements
 module SwaggerDocsGenerator
   module Actions
     # # Test :parameters
@@ -63,6 +67,7 @@ module SwaggerDocsGenerator
 
       def query(data)
         @in = :query
+        @name = data[0]
       end
 
       alias query_hash path_hash
@@ -80,15 +85,19 @@ module SwaggerDocsGenerator
           in: @in,
           description: @description,
           required: true,
-          schema: { type: :object, items: { '$ref': @definition.tr(' ', '_').camelize } }
+          schema: {
+            type: :object, items: { '$ref': @definition.tr(' ', '_').camelize }
+          }
         }
       end
 
       def form(data)
         @in = :form
+        @name = data[0]
       end
 
       def form_hash
+        {}
       end
     end
   end

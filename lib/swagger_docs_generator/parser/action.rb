@@ -2,6 +2,14 @@
 
 require 'swagger_docs_generator/parser/actions/actions'
 
+# :reek:UtilityFunction
+# :reek:InstanceVariableAssumption
+# :reek:TooManyInstanceVariables
+# :reek:TooManyStatements
+
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
 module SwaggerDocsGenerator
   # # Parse action in controller classe to Rails application. It's adding
   # paths to swagger docs file.
@@ -15,9 +23,8 @@ module SwaggerDocsGenerator
     end
 
     def adding_path
-      json = JSON.parse(File.read(controller_file))
-      File.open(controller_file, 'w') do |file|
-        # json['paths'].merge!(construct_routes(json))
+      json = JSON.parse(File.read(temporary_file))
+      File.open(temporary_file, 'w') do |file|
         path_exist(json, construct_routes)
         file.puts(JSON.pretty_generate(json))
       end
@@ -100,3 +107,6 @@ module SwaggerDocsGenerator
     end
   end
 end
+# rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity

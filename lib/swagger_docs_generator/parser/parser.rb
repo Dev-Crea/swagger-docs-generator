@@ -18,7 +18,7 @@ module SwaggerDocsGenerator
     end
 
     def temporary_file
-      File.join(SwaggerDocsGenerator.temporary_folder, controller_json)
+      File.join(SwaggerDocsGenerator.temporary_folder, tmp_json)
     end
 
     private
@@ -27,8 +27,8 @@ module SwaggerDocsGenerator
       @controller.controller_name
     end
 
-    def controller_json
-      "#{controller_name}.json"
+    def tmp_json
+      "#{@tag_name}.json"
     end
   end
 end

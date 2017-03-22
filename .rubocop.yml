@@ -10,3 +10,7 @@ Metrics/BlockLength:
   Exclude:
     - spec/**/*
     - swagger_docs_generator.gemspec
+
+Style/TrivialAccessors:
+  Exclude:
+    - lib/swagger_docs_generator/parser/**/*

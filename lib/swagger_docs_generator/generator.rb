@@ -13,28 +13,42 @@ module SwaggerDocsGenerator
     def initialize
       @hash = {}
       @file = 'swagger.json'
-      @swagger_file = File.join(path, @file)
-      @version = File.join(path, SwaggerDocsGenerator.configure_info.version)
-      create_version_folder
+      @swagger_file = File.join(Dir.pwd, 'public', @file)
+      @temp = FileUtils.mkdir_p(SwaggerDocsGenerator.temporary_folder)
+    end
+
+    # Import documentation file
+    def import_documentations
+      require SwaggerDocsGenerator.file_base
+      SwaggerDocsGenerator.file_docs.each { |rb| require rb }
     end
 
     # Open or create a swagger.json file
     def generate_swagger_file
       delete_file_before
-      File.open(@swagger_file, 'a+') { |file| file.puts agregate_metadata }
+      File.open(@swagger_file, 'a+') do |file|
+        file.puts write_in_swagger_file.to_json
+      end
     end
 
     # Delete files temporary
     def delete_temporary_files
-      FileUtils.remove_dir(@version) if SwaggerDocsGenerator.configure.cleanning
+      FileUtils.rm_rf(@temp[0]) if SwaggerDocsGenerator.configure.cleanning
     end
 
     def info_swagger_file
-      create_info_text(@swagger_file)
+      "#{prefix_info} #{@swagger_file}"
     end
 
     def info_swagger_temporary
-      create_info_text(@version)
+      "#{prefix_info} #{SwaggerDocsGenerator.temporary_folder}"
+    end
+
+    def info_controller_parser
+      klasses = "#{SwaggerDocsGenerator.version_ruby}::BaseDoc".constantize
+      klasses.subclasses.each do |controller|
+        yield("#{prefix_info} [Controller] #{controller::CONTROLLER}")
+      end
     end
 
     private
@@ -45,21 +59,8 @@ module SwaggerDocsGenerator
       '->'
     end
 
-    def create_info_text(message)
-      "#{prefix_info} #{message}"
-    end
-
-    # :reek:UtilityFunction
-    def path
-      File.join(Dir.pwd, '/public')
-    end
-
     def delete_file_before
       File.delete(@swagger_file) if File.exist?(@swagger_file)
-    end
-
-    def create_version_folder
-      FileUtils.mkdir_p(@version) unless File.directory?(@version)
     end
 
     def write_in_swagger_file
@@ -80,15 +81,6 @@ module SwaggerDocsGenerator
 
     def write_in_swagger_file_models
       @hash.merge!(MetadataDefinition.new.construct_swagger_file)
-    end
-
-    def agregate_metadata
-      case defined?(Rails) && Rails.env
-      when 'production' || 'test'
-        write_in_swagger_file.to_json
-      else
-        JSON.pretty_generate write_in_swagger_file
-      end
     end
   end
 end

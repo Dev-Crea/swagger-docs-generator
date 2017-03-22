@@ -14,3 +14,7 @@ Metrics/BlockLength:
 Style/TrivialAccessors:
   Exclude:
     - lib/swagger_docs_generator/parser/**/*
+
+Performance/RedundantMerge:
+  Exclude:
+    - lib/swagger_docs_generator/parser/**/*

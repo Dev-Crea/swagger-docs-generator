@@ -13,7 +13,7 @@ describe SwaggerDocsGenerator::Configuration, type: :gem,
       config.host = 'http://example.com'
       config.swagger = '2.2.4'
       config.cleanning = false
-      config.base_controller = []
+      config.doc_class = 'base.rb'
     end
   end
 
@@ -28,14 +28,14 @@ describe SwaggerDocsGenerator::Configuration, type: :gem,
       it_behaves_like 'variable exist', false
     end
 
-    context 'base_controller' do
-      let(:variable) { SwaggerDocsGenerator.config.base_controller }
-      it_behaves_like 'variable exist', []
-    end
-
     context 'base_path' do
       let(:variable) { SwaggerDocsGenerator.config.base_path }
       it_behaves_like 'variable exist', '/'
+    end
+
+    context 'doc_class' do
+      let(:variable) { SwaggerDocsGenerator.config.doc_class }
+      it_behaves_like 'variable exist', 'base.rb'
     end
 
     context 'schemes' do

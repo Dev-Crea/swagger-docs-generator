@@ -4,26 +4,23 @@
 
 module SwaggerDocsGenerator
   module Actions
-    # Write parameter type :body
-    class Body < Parameter
+    # Write parameter type :query
+    class Query < Parameter
       def to_hash
         {
-          in: :body,
+          in: :query,
           name: @name || 'body',
           description: @description || '',
           required: @required || true,
-          schema: { '$ref': format_name }
+          type: @type || 'array',
+          items: { type: 'string' }
         }
       end
 
       private
 
-      def schema(text)
-        @schema = text
-      end
-
-      def format_name
-        "#/definitions/#{@schema.tr(' ', '_').camelize}"
+      def type(text)
+        @type = text
       end
     end
   end

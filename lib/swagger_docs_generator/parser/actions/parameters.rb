@@ -17,16 +17,7 @@ module SwaggerDocsGenerator
       end
 
       def to_hash
-        if @param.nil?
-          case @in
-          when :path then path_hash
-          when :header then header_hash
-          when :query then query_hash
-          when :form then form_hash
-          end
-        else
-          @param.to_hash
-        end
+        @param.to_hash
       end
 
       private
@@ -43,66 +34,31 @@ module SwaggerDocsGenerator
         @required = text
       end
 
-
-      def path(data)
-        @in = :path
-        @name = data[0]
-        @description = data[1]
-        @type = data[2]
-        @required = data[3]
-      end
-
-      def path_hash
-        {
-          name: @name,
-          in: @in,
-          description: @description,
-          required: @required,
-          type: @type
-        }
-      end
-
-      def header(data)
-        @in = :header
-        @name = data[0]
-        @description = data[1]
-        @type = data[2]
-        @required = data[3]
-        @enum = data[4]
-      end
-
-      def header_hash
-        {
-          name: @name,
-          in: @in,
-          description: @description,
-          required: @required,
-          type: @type,
-          enum: @enum
-        }
-      end
-
-      def query(data)
-        @in = :query
-        @name = data[0]
-      end
-
-      alias query_hash path_hash
-
       def body(&block)
         @param = Body.new(&block)
       end
 
-      def form(data)
-        @in = :form
-        @name = data[0]
+      def form(&block)
+        @param = Form.new(&block)
       end
 
-      def form_hash
-        {}
+      def header(&block)
+        @param = Header.new(&block)
+      end
+
+      def path(&block)
+        @param = Path.new(&block)
+      end
+
+      def query(&block)
+        @param = Query.new(&block)
       end
     end
   end
 end
 
 require 'swagger_docs_generator/parser/actions/parameters/body'
+require 'swagger_docs_generator/parser/actions/parameters/form'
+require 'swagger_docs_generator/parser/actions/parameters/header'
+require 'swagger_docs_generator/parser/actions/parameters/path'
+require 'swagger_docs_generator/parser/actions/parameters/query'

@@ -4,13 +4,12 @@
 
 module SwaggerDocsGenerator
   module Actions
-    # Write parameter type :path
-    class Path < Parameter
+    # Write parameter type :header
+    class Header < Parameter
       def to_hash
         {
-          in: :path,
-          name: @name || 'path',
-          description: @description,
+          in: :header,
+          description: @description || '',
           required: @required || true,
           type: @type
         }

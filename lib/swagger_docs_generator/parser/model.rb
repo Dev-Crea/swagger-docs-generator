@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'swagger_docs_generator/parser/models/mongo'
-require 'swagger_docs_generator/parser/models/active_record'
-
 module SwaggerDocsGenerator
   # Parser models
   class Model

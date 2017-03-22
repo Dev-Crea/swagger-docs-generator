@@ -13,6 +13,12 @@ require 'swagger_docs_generator/configuration/configuration_info'
 
 # Modules methods in a controller
 require 'swagger_docs_generator/methods'
+
+# Models reader (ORM)
+require 'swagger_docs_generator/models/mongo'
+require 'swagger_docs_generator/models/active_record'
+
+# Parser class
 require 'swagger_docs_generator/parser/parser'
 
 # Extractor verb

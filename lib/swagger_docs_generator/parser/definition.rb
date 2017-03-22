@@ -8,7 +8,7 @@ module SwaggerDocsGenerator
   # and adding automaticaly tags element.
   class ParserDefinition < Parser
     def initialize(name, &block)
-      super(binding.of_callers[1].klass::CONTROLLER)
+      super(binding.of_callers[1].klass)
       @name = name
       instance_eval(&block)
     end

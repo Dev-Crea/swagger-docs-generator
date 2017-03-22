@@ -7,9 +7,9 @@ module SwaggerDocsGenerator
   # and adding automaticaly tags element.
   class ParserController < Parser
     def initialize(description)
-      super(binding.of_callers[1].klass::CONTROLLER)
-      prepare_file
+      super(binding.of_callers[1].klass)
       @description = description
+      prepare_file
     end
 
     def adding_tag
@@ -33,7 +33,7 @@ module SwaggerDocsGenerator
     end
 
     def construct_tags
-      { name: controller_name, description: @description }
+      { name: tag_name, description: @description }
     end
   end
 end

@@ -14,8 +14,9 @@ module SwaggerDocsGenerator
   class Parser
     attr_reader :controller, :path, :version
 
-    def initialize(controller)
-      @controller = controller
+    def initialize(klass)
+      @controller = klass::CONTROLLER
+      @tag_name = defined?(klass::TAG) ? klass::TAG : controller_name
     end
 
     def temporary_file

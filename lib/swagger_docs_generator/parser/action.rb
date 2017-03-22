@@ -9,13 +9,12 @@ require 'swagger_docs_generator/parser/actions/actions'
 
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/PerceivedComplexity
 module SwaggerDocsGenerator
   # # Parse action in controller classe to Rails application. It's adding
   # paths to swagger docs file.
   class ParserAction < Parser
     def initialize(action, &block)
-      super(binding.of_callers[1].klass::CONTROLLER)
+      super(binding.of_callers[1].klass)
       @action = action
       @parameter = []
       @response = {}
@@ -61,7 +60,7 @@ module SwaggerDocsGenerator
       element.merge!(deprecated: @deprecated)     if @deprecated.present?
       element.merge!(produces: @produce)          if @produce.present?
       element.merge!(responses: @response)
-      element.merge!(tags: @tag || default_tag)
+      element.merge!(tags: write_tag)
     end
 
     def route
@@ -72,8 +71,8 @@ module SwaggerDocsGenerator
       { @route => { @verb => construct_path }.merge!(patch: construct_path) }
     end
 
-    def default_tag
-      [controller_name]
+    def write_tag
+      [@tag_name]
     end
 
     def summary(text)
@@ -109,4 +108,3 @@ module SwaggerDocsGenerator
 end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/CyclomaticComplexity
-# rubocop:enable Metrics/PerceivedComplexity

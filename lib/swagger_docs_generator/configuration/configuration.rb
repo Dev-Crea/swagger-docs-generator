@@ -18,18 +18,15 @@ module SwaggerDocsGenerator
   # @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
   class Configuration
     # Accessors with default value
-    attr_accessor :swagger, :cleanning, :base_controller, :base_path
+    attr_accessor :swagger, :cleanning, :base_path
 
     # Accessors without default value
     attr_accessor :schemes, :consumes, :produces, :host, :external_docs,
-                  :security, :definitions
-    # :external_docs, :security_definitions, :security
-    # :paths, :tags, :host
+                  :security, :definitions, :doc_class, :doc_folder
 
     # Initalize default value (and requried) for json swagger file
     def initialize
       @swagger = '2.0'
-      @base_controller = ''
       @base_path = '/'
       @cleanning = true
     end
@@ -42,6 +39,18 @@ module SwaggerDocsGenerator
 
     def config
       @config ||= Configuration.new
+    end
+
+    def file_base
+      File.join(@config.doc_folder, @config.doc_class)
+    end
+
+    def file_docs
+      Dir[File.join(@config.doc_folder, '*.rb')]
+    end
+
+    def temporary_folder
+      Rails.root.join('tmp', SwaggerDocsGenerator::GEM)
     end
   end
 end

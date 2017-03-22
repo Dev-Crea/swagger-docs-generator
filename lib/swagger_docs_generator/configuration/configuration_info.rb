@@ -26,5 +26,9 @@ module SwaggerDocsGenerator
     def info
       @info ||= ConfigurationInfo.new
     end
+
+    def version_ruby
+      @info.version.humanize
+    end
   end
 end

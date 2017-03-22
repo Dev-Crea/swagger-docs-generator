@@ -24,20 +24,19 @@ module SwaggerDocsGenerator
       find_models.merge!(find_in_controller)
     end
 
-    # :reek:NilCheck
     def find_models
       hash = {}
-      controllers.each do |controller|
-        data = each_controller(controller)
-        hash.merge!(data) unless data.nil?
+      all_class_documentation.each do |controller|
+        data = each_controller(controller::CONTROLLER)
+        hash.merge!(data) unless data.empty?
       end
       hash
     end
 
     def find_in_controller
       hash = {}
-      controllers.each do |controller|
-        file = File.join(file_path, "#{controller.controller_name}.json")
+      all_class_documentation.each do |controller|
+        file = temporary_file(controller::CONTROLLER)
         hash.merge!(read_file(file)) if File.exist?(file)
       end
       hash
@@ -49,11 +48,15 @@ module SwaggerDocsGenerator
       json.key?('definitions') ? json['definitions'] : {}
     end
 
-    def each_controller(controller)
-      @model = Model.new(controller)
+    def each_controller(model_name)
+      read_model(model_name) || {}
+    end
+
+    def read_model(model_name)
+      @model = Model.new(model_name)
       contruct_hash
     rescue NameError => message
-      puts "Error model name : #{message.name}"
+      puts "-> [Model] #{message.name} -- doesn't exist"
     end
 
     def contruct_hash

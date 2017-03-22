@@ -6,40 +6,12 @@ module SwaggerDocsGenerator
   # @abstract
   #   Abstract class for metadata provide to controlloer in Rails application
   class MetadataController < Metadata
-    def initialize
-      @file_path = File.join(Dir.pwd, 'public',
-                             SwaggerDocsGenerator.configure_info.version)
-      @conf = SwaggerDocsGenerator.configure.base_controller
-      @controllers = case @conf
-                     when String then string_controller
-                     when Array then array_controller
-                     when Class then class_controller
-                     end
-    end
-
     private
 
-    attr_accessor :controllers, :file_path
-
     # :reek:UtilityFunction
-    def string_controller
-      ApplicationController.subclasses
-    end
-
-    def array_controller
-      array = []
-      @conf.map { |controller| array |= search_subclasses(controller) }
-      array
-    end
-
-    def class_controller
-      search_subclasses(@conf.subclasses)
-    end
-
-    # :reek:UtilityFunction
-    def search_subclasses(controller)
-      ctrl = controller.subclasses
-      ctrl.count.zero? ? [controller] : ctrl
+    def temporary_file(controller)
+      File.join(SwaggerDocsGenerator.temporary_folder,
+                "#{controller.controller_name}.json")
     end
   end
 end

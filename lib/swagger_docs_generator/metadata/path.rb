@@ -7,15 +7,11 @@ module SwaggerDocsGenerator
   #
   # @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#pathsObject
   class MetadataPath < MetadataController
-    def initialize
-      super
-    end
-
     # Each controller parsed
     def construct_swagger_file
       hash = {}
-      controllers.each do |controller|
-        file = File.join(file_path, "#{controller.controller_name}.json")
+      all_class_documentation.each do |controller|
+        file = temporary_file(controller::CONTROLLER)
         hash.merge!(JSON.parse(File.read(file))['paths']) if File.exist?(file)
       end
       { paths: hash }

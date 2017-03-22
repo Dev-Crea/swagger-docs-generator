@@ -24,6 +24,15 @@ module SwaggerDocsGenerator
 
     private
 
+    # :reek:UtilityFunction
+    def base_class_documentation
+      "#{SwaggerDocsGenerator.version_ruby}::BaseDoc".constantize
+    end
+
+    def all_class_documentation
+      base_class_documentation.subclasses
+    end
+
     attr_reader :config
   end
 end

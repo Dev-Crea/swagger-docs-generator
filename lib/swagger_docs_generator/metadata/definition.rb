@@ -8,7 +8,7 @@ module SwaggerDocsGenerator
   # Generate metadata for block definition in swagger file
   #
   # @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#definitions-object
-  class MetadataDefinition < MetadataController
+  class MetadataDefinition < Metadata
     def initialize
       super
       @model = nil
@@ -66,6 +66,12 @@ module SwaggerDocsGenerator
           properties: @model.attribute_properties
         }
       }
+    end
+
+    # :reek:UtilityFunction
+    def temporary_file(controller)
+      File.join(SwaggerDocsGenerator.temporary_folder,
+                "#{controller.controller_name}.json")
     end
   end
 end

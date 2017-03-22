@@ -11,7 +11,6 @@ module SwaggerDocsGenerator
     attr_reader :swagger_file
 
     def initialize
-      @hash = {}
       @file = 'swagger.json'
       @swagger_file = File.join(Dir.pwd, 'public', @file)
       @temp = FileUtils.mkdir_p(SwaggerDocsGenerator.temporary_folder)
@@ -27,7 +26,8 @@ module SwaggerDocsGenerator
     def generate_swagger_file
       delete_file_before
       File.open(@swagger_file, 'a+') do |file|
-        file.puts write_in_swagger_file.to_json
+        # file.puts write_in_swagger_file.to_json
+        file.puts JSON.pretty_generate write_in_swagger_file
       end
     end
 
@@ -63,24 +63,15 @@ module SwaggerDocsGenerator
       File.delete(@swagger_file) if File.exist?(@swagger_file)
     end
 
+    # :reek:UtilityFunction
     def write_in_swagger_file
-      write_in_swagger_file_configurations
-      write_in_swagger_file_controllers
-      write_in_swagger_file_models
-    end
-
-    def write_in_swagger_file_configurations
-      @hash.merge!(MetadataConfiguration.new.construct_swagger_file)
-      @hash.merge!(MetadataInfo.new.construct_swagger_file)
-    end
-
-    def write_in_swagger_file_controllers
-      @hash.merge!(MetadataPath.new.construct_swagger_file)
-      @hash.merge!(MetadataTag.new.construct_swagger_file)
-    end
-
-    def write_in_swagger_file_models
-      @hash.merge!(MetadataDefinition.new.construct_swagger_file)
+      # Parse option to this gem
+      hash = MetadataConfiguration.new.construct_swagger_file
+      hash.merge!(MetadataInfo.new.construct_swagger_file)
+      # Parse temporary file (controller - actions)
+      hash.merge!(MetadataJsons.new.construct_swagger_file)
+      # Parse Model
+      hash.merge!(MetadataDefinition.new.construct_swagger_file)
     end
   end
 end

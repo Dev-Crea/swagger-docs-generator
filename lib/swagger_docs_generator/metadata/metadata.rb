@@ -39,4 +39,5 @@ end
 
 require 'swagger_docs_generator/metadata/configuration'
 require 'swagger_docs_generator/metadata/info'
-require 'swagger_docs_generator/metadata/controller'
+require 'swagger_docs_generator/metadata/jsons'
+require 'swagger_docs_generator/metadata/definition'

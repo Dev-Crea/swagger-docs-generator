@@ -32,8 +32,8 @@ module SwaggerDocsGenerator
     end
 
     def create_file
-      puts "Create file : #{temporary_file}"
-      FileUtils.touch(temporary_file)
+      base_file = { paths: {}, tags: {}, definitions: {} }
+      File.open(temporary_file, 'a+') { |file| file.puts(base_file.to_json) }
     end
   end
 end

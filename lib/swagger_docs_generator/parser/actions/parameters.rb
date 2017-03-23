@@ -5,6 +5,7 @@
 # :reek:TooManyInstanceVariables
 # :reek:DuplicateMethodCall
 # :reek:TooManyStatements
+
 module SwaggerDocsGenerator
   module Actions
     # # Test :parameters
@@ -52,6 +53,10 @@ module SwaggerDocsGenerator
 
       def query(&block)
         @param = Query.new(&block)
+      end
+
+      def test_value(value, default)
+        value.empty? ? default : value
       end
     end
   end

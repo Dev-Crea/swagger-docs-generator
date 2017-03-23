@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # :reek:InstanceVariableAssumption
+# :reek:NilCheck
 
 module SwaggerDocsGenerator
   module Actions
@@ -8,11 +9,11 @@ module SwaggerDocsGenerator
     class Query < Parameter
       def to_hash
         {
-          in: :query,
-          name: @name || 'body',
-          description: @description || '',
-          required: @required || true,
-          type: @type || 'array',
+          in:               :query,
+          name:             @name.nil? ? 'query' : @name,
+          description:      @description.nil? ? '' : @description,
+          required:         @required.nil? ? true : @required,
+          type:             @type.nil? ? 'array' : @type,
           items: { type: 'string' }
         }
       end

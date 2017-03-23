@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # :reek:InstanceVariableAssumption
+# :reek:NilCheck
 
 module SwaggerDocsGenerator
   module Actions
@@ -8,11 +9,11 @@ module SwaggerDocsGenerator
     class Body < Parameter
       def to_hash
         {
-          in: :body,
-          name: @name || 'body',
-          description: @description || '',
-          required: @required || true,
-          schema: { '$ref': format_name }
+          in:               :body,
+          name:             @name.nil? ? 'body' : @name,
+          description:      @description.nil? ? '' : @description,
+          required:         @required.nil? ? true : @required,
+          schema: { '$ref': @schema.nil? ? '' : format_name }
         }
       end
 

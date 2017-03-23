@@ -13,7 +13,7 @@ module SwaggerDocsGenerator
       instance_eval(&block)
     end
 
-    def adding_defintion
+    def adding_definition
       json = JSON.parse(File.read(temporary_file))
       File.open(temporary_file, 'w') do |file|
         json['definitions'].merge!(construct_definition)

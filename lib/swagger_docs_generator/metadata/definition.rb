@@ -21,7 +21,7 @@ module SwaggerDocsGenerator
     private
 
     def search_definition
-      find_models.merge!(find_in_controller)
+      find_models.merge!(find_in_jsons)
     end
 
     def find_models
@@ -33,11 +33,10 @@ module SwaggerDocsGenerator
       hash
     end
 
-    def find_in_controller
+    def find_in_jsons
       hash = {}
-      all_class_documentation.each do |controller|
-        file = temporary_file(controller::CONTROLLER)
-        hash.merge!(read_file(file)) if File.exist?(file)
+      files_tmp.each do |file|
+        hash.merge!(read_part_json(file, 'definitions'))
       end
       hash
     end
@@ -72,6 +71,16 @@ module SwaggerDocsGenerator
     def temporary_file(controller)
       File.join(SwaggerDocsGenerator.temporary_folder,
                 "#{controller.controller_name}.json")
+    end
+
+    # :reek:UtilityFunction
+    def files_tmp
+      Dir[Rails.root.join(SwaggerDocsGenerator.temporary_folder, '*.json')]
+    end
+
+    # :reek:UtilityFunction
+    def read_part_json(file, key)
+      JSON.parse(File.read(file))[key]
     end
   end
 end

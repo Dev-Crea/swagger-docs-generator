@@ -23,7 +23,7 @@ module SwaggerDocsGenerator
     # Complete definitions objects for each controller.
     def swagger_definition(name, &block)
       parse = ParserDefinition.new(name, &block)
-      parse.adding_defintion
+      parse.adding_definition
     end
 
     alias scontroller   swagger_controller

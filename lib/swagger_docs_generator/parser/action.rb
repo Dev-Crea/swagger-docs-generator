@@ -22,6 +22,7 @@ module SwaggerDocsGenerator
     end
 
     def adding_path
+      create_file unless File.exist?(temporary_file)
       json = JSON.parse(File.read(temporary_file))
       File.open(temporary_file, 'w') do |file|
         path_exist(json, construct_routes)

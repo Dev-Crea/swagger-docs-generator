@@ -30,6 +30,11 @@ module SwaggerDocsGenerator
     def tmp_json
       "#{@tag_name}.json"
     end
+
+    def create_file
+      puts "Create file : #{temporary_file}"
+      FileUtils.touch(temporary_file)
+    end
   end
 end
 

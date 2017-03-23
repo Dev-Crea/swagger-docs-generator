@@ -9,10 +9,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### [Added]
 - Spec parameters
 - Use constant TAG
+- Display post install message
+
+### [Removed]
+- Delete old class unless
 
 ### [Changed]
 - Parameters use DSL ruby
 - Update parameters configuration
+- For definitions element : parse model then temporary json
 
 ## [0.2.0] - 2017-03-13
 ### [Added]

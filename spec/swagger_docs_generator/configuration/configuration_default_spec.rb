@@ -15,9 +15,14 @@ describe SwaggerDocsGenerator::Configuration, type: :gem,
       it_behaves_like 'variable exist', true
     end
 
-    context 'base_controller' do
-      let(:variable) { SwaggerDocsGenerator.config.base_controller }
-      it_behaves_like 'variable exist', ''
+    context 'doc_class' do
+      let(:variable) { SwaggerDocsGenerator.config.doc_class }
+      it_behaves_like 'variable does not exist'
+    end
+
+    context 'doc_folder' do
+      let(:variable) { SwaggerDocsGenerator.config.doc_folder }
+      it_behaves_like 'variable does not exist'
     end
 
     context 'base_path' do

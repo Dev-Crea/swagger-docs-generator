@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ['lib']
 
-  spec.post_install_message = RubyRabbitmqJanus::POST_INSTALL
+  spec.post_install_message = SwaggerDocsGenerator::POST_INSTALL
 
   spec.add_development_dependency 'bundler', '~> 1.13'
   spec.add_development_dependency 'rake', '~> 10.0'

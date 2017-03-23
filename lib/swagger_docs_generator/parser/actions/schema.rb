@@ -1,22 +1,23 @@
 # frozen_string_literal: true
 
-# :reek:InstanceVariableAssumption
 module SwaggerDocsGenerator
   module Actions
-    # Object Schema
-    #
-    # Parse repsonse and create schema swagger object
+    # Create object swagger Schema
     class Schema
       def initialize(&block)
+        @definition = nil
+        @type = 'array'
         instance_eval(&block) if block_given?
       end
 
       def to_hash
-        element = { type: @type || 'array' }
-        element.merge!(items: { '$ref': @definition }) if @definition.present?
+        element = { type: @type }
+        element.merge!(items: { '$ref': @definition })
       end
 
       private
+
+      attr_reader :type, :definition
 
       def type(text)
         @type = text

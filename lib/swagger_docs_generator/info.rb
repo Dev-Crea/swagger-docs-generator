@@ -18,4 +18,23 @@ module SwaggerDocsGenerator
   HOMEPAGE =      'https://github.com/Dev-Crea/swagger-docs-generator'
   # License
   LICENSE =       'MIT'
+  # Define a post install message
+  POST_INSTALL = \
+    "# ====================================================== #\n" \
+    "# Thanks for installing SwaggerDocsGenerator !           #\n" \
+    "# #{HOMEPAGE}.    #\n" \
+    "# ;;;;;;;;;;;:.                                          #\n" \
+    "# ;;;;;;;;;;;;;;;;;;                                     #\n" \
+    "# ;;;;;;;;;;;:;;;;;;;;                                   #\n" \
+    "# ;;;;;;;;;;` ;;;;;;;;                                   #\n" \
+    "# ;;;;;;;;;  :;;;;;;;;.                                  #\n" \
+    "# ;;;;;;;;   :::::;;;;;                                  #\n" \
+    "# ;;;;;;,       ,;;;;;;                                  #\n" \
+    "# ;;;;;        ;;;;;;;;                                  #\n" \
+    "# ;;;;;;;;;   ;;;;;;;;,                                  #\n" \
+    "# ;;;;;;;;; `;;;;;;;;;     A    ZZZZZZZ ZZZZZZZ LL       #\n" \
+    "# ;;;;;;;;.:;;;;;;;;;;    A A      ZZZ     ZZZ  LL       #\n" \
+    "# ;;;;;;;;;;;;;;;;;      AAAAA   ZZ      ZZ     LL       #\n" \
+    "# ;;;;;;;;;;;;;,        A     A ZZZZZZZ ZZZZZZZ LLLLLLL  #\n" \
+    '# ====================================================== #'
 end

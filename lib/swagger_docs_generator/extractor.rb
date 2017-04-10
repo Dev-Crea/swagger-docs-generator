@@ -11,12 +11,14 @@ module SwaggerDocsGenerator
       @routes = Rails.application.routes.routes
     end
 
+    # Extract verb to routes
     def verb
       router do |route|
         route.verb.source.to_s.delete('$' + '^')
       end
     end
 
+    # Extract path to routes and change format to parameter path
     def path
       router do |route|
         route.path.spec.to_s.gsub('(.:format)', '.json').gsub(':id', '{id}')

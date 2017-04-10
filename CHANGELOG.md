@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.3.3] - 2017-04-10
 ### [Added]
 - Complete yard documentation
+- Summary is replace by method parsing if not present
 
 ### [Fixed]
 - parameter in path format

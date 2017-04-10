@@ -8,6 +8,7 @@ require 'swagger_docs_generator'
 require 'json-schema-rspec'
 require 'pry'
 require 'faker'
+require 'rake'
 
 Dir['spec/supporrt/**/*.rb'].each do |f|
   require File.expand_path(f)

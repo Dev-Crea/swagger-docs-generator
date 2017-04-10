@@ -18,7 +18,7 @@ module SwaggerDocsGenerator
   # @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
   class Configuration
     # Accessors with default value
-    attr_accessor :swagger, :cleanning, :base_path
+    attr_accessor :swagger, :cleanning, :base_path, :compress
 
     # Accessors without default value
     attr_accessor :schemes, :consumes, :produces, :host, :external_docs,
@@ -29,6 +29,7 @@ module SwaggerDocsGenerator
       @swagger = '2.0'
       @base_path = '/'
       @cleanning = true
+      @compress = false
     end
   end
 

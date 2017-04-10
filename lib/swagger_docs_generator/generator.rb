@@ -36,14 +36,17 @@ module SwaggerDocsGenerator
       FileUtils.rm_rf(@temp[0]) if SwaggerDocsGenerator.configure.cleanning
     end
 
+    # Create string with info to swagger file path
     def info_swagger_file
       "#{prefix_info} #{@swagger_file}"
     end
 
+    # Create string with info to path temporary file
     def info_swagger_temporary
       "#{prefix_info} #{SwaggerDocsGenerator.temporary_folder}"
     end
 
+    # Create string with controller parsed
     def info_controller_parser
       klasses = "#{SwaggerDocsGenerator.version_ruby}::BaseDoc".constantize
       klasses.subclasses.each do |controller|

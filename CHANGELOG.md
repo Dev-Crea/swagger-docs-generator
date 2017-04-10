@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.3.3] - 2017-04-10
+### [Added]
+- Complete yard documentation
+- Summary is replace by method parsing if not present
+
+### [Fixed]
+- parameter in path format
+
 ## [0.3.1] - 2017-03-13
 ### [Fixed]
 - Fixed checksum

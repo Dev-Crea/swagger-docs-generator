@@ -54,7 +54,8 @@ module SwaggerDocsGenerator
 
     def construct_path
       element = {}
-      element.merge!(summary: @summary)           if @summary.present?
+      summary_text = @summary.present? ? @summary : @action.to_s.humanize
+      element.merge!(summary: summary_text)
       element.merge!(description: @description)   if @description.present?
       element.merge!(parameters: @parameter)      if @parameter.present?
       element.merge!(consumes: @consume)          if @consume.present?

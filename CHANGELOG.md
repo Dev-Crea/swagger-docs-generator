@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.3.5] - 2017-04-10
 ### [Added]
+- Complete parameters header object
 - Add option compress for compress `swagger.json` file
 
 ## [0.3.4] - 2017-04-10

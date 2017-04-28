@@ -57,21 +57,6 @@ RSpec.shared_examples 'parameters header haves' do
     let(:result) { param_type }
     include_examples 'parameter equal', :@type
   end
-
-  it do
-    name = param_name.nil? ? 'header' : param_name
-    description = param_description.nil? ? '' : param_description
-    required = param_required.nil? ? true : param_required
-    type = param_type.nil? ? '' : param_type
-
-    expect(param.to_hash).to eql(
-      in: :header,
-      name: name,
-      description: description,
-      required: required,
-      type: type
-    )
-  end
 end
 
 # Test for parameter PATH

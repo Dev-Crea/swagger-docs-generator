@@ -35,6 +35,15 @@ module SwaggerDocsGenerator
       def format(text)
         @format = text
       end
+
+      def no_mandatory_field
+        hash = {}
+        FIELDS.each do |parameter|
+          value = instance_variable_get("@#{parameter}")
+          hash.merge!(parameter.to_sym => value) if value.present?
+        end
+        hash
+      end
     end
   end
 end

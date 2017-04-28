@@ -58,6 +58,15 @@ module SwaggerDocsGenerator
       def test_value(value, default)
         value.empty? ? default : value
       end
+
+      def no_mandatory_field
+        hash = {}
+        FIELDS.each do |parameter|
+          value = instance_variable_get("@#{parameter}")
+          hash.merge!(parameter.to_sym => value) if value.present?
+        end
+        hash
+      end
     end
   end
 end

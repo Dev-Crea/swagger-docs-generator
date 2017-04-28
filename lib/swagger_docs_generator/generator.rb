@@ -26,11 +26,11 @@ module SwaggerDocsGenerator
     def generate_swagger_file
       delete_file_before
       File.open(@swagger_file, 'a+') do |file|
-        file.puts = if SwaggerDocsGenerator.configure.compress
-                      write_in_swagger_file.to_json
-                    else
-                      JSON.pretty_generate write_in_swagger_file
-                    end
+        file.write(if SwaggerDocsGenerator.configure.compress
+                     write_in_swagger_file.to_json
+                   else
+                     JSON.pretty_generate write_in_swagger_file
+                   end)
       end
     end
 

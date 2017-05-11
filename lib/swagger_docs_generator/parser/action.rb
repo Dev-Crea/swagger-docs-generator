@@ -9,9 +9,12 @@ require 'swagger_docs_generator/parser/actions/actions'
 # :reek:DuplicateMethodCall
 # :reek:FeatureEnvy
 # :reek:TooManyMethods
+# :reek:LongParameterList
 
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Style/MultilineIfModifier
+# rubocop:disable Metrics/ClassLength
 module SwaggerDocsGenerator
   # # Parse action in controller classe to Rails application. It's adding
   # paths to swagger docs file.
@@ -39,20 +42,28 @@ module SwaggerDocsGenerator
       old_route = json['paths']
 
       keys_new = hash.keys[0]
-      index = keys_new.to_s
       paths = hash.keys.split.first
 
-      if paths.count <= 2
-        paths.each do |path|
-          tag = extract_tag(path)
-          tags = hash[path][@verb][:tags]
-          if path.downcase.include?(tag.downcase) && !tags.include?(tag)
-            hash[path][@verb][:tags].push(tag)
-            hash[path]['patch'][:tags].push(tag) if @verb.eql?('put')
-          end
-        end
-      end
+      test_tags(paths, hash)
+      merge_hashes(old_route, keys_new.to_s, paths, hash)
+    end
 
+    def test_tags(paths, hash)
+      paths.each do |path|
+        tag = extract_tag(path)
+        next unless path.downcase.include?(tag.downcase) &&
+                    !hash[path][@verb][:tags].include?(tag) &&
+                    !tag.include?('.json')
+        add_tag(hash, path, tag)
+      end if paths.count <= 2
+    end
+
+    def add_tag(hash, path, tag)
+      hash[path][@verb][:tags].push(tag)
+      hash[path]['patch'][:tags].push(tag) if @verb.eql?('put')
+    end
+
+    def merge_hashes(old_route, index, paths, hash)
       if !old_route.blank? && old_route.keys.include?(index)
         paths.each do |path|
           old_route[path].merge!(hash[path])
@@ -75,8 +86,8 @@ module SwaggerDocsGenerator
 
     def construct_path
       element = {}
-      summary_text = @summary.present? ? @summary : @action.to_s.humanize
-      element.merge!(summary: summary_text)
+      summary_text = @summary.present? ? @summary : @action.to_s
+      element.merge!(summary: summary_text.humanize)
       element.merge!(description: @description)   if @description.present?
       element.merge!(parameters: @parameter)      if @parameter.present?
       element.merge!(consumes: @consume)          if @consume.present?
@@ -99,9 +110,7 @@ module SwaggerDocsGenerator
     end
 
     def extract_tag(route)
-      route.split('/').reject do |rte|
-        rte.empty?
-      end.first.humanize
+      route.split('/').reject(&:empty?).first.humanize
     end
 
     def summary(text)
@@ -137,3 +146,5 @@ module SwaggerDocsGenerator
 end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Style/MultilineIfModifier
+# rubocop:enable Metrics/ClassLength

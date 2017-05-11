@@ -6,6 +6,9 @@ require 'swagger_docs_generator/parser/actions/actions'
 # :reek:InstanceVariableAssumption
 # :reek:TooManyInstanceVariables
 # :reek:TooManyStatements
+# :reek:DuplicateMethodCall
+# :reek:FeatureEnvy
+# :reek:TooManyMethods
 
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/CyclomaticComplexity
@@ -37,19 +40,37 @@ module SwaggerDocsGenerator
 
       keys_new = hash.keys[0]
       index = keys_new.to_s
+      paths = hash.keys.split.first
+
+      if paths.count <= 2
+        paths.each do |path|
+          tag = extract_tag(path)
+          tags = hash[path][@verb][:tags]
+          if path.downcase.include?(tag.downcase) && !tags.include?(tag)
+            hash[path][@verb][:tags].push(tag)
+            hash[path]['patch'][:tags].push(tag) if @verb.eql?('put')
+          end
+        end
+      end
 
       if !old_route.blank? && old_route.keys.include?(index)
-        old_route[index].merge!(hash[keys_new])
+        paths.each do |path|
+          old_route[path].merge!(hash[path])
+        end
       else
         old_route.merge!(hash)
       end
     end
 
     def construct_routes
+      yop = {}
       extract = Extractor.new(controller, @action)
       @verb = extract.verb
       @route = extract.path
-      @verb.eql?('put') ? route_update : route
+      @route.each do |rte|
+        yop.merge!(@verb.eql?('put') ? route_update(rte) : route(rte))
+      end
+      yop
     end
 
     def construct_path
@@ -65,16 +86,22 @@ module SwaggerDocsGenerator
       element.merge!(tags: write_tag)
     end
 
-    def route
-      { @route => { @verb => construct_path } }
+    def route(rte)
+      { rte => { @verb => construct_path } }
     end
 
-    def route_update
-      { @route => { @verb => construct_path }.merge!(patch: construct_path) }
+    def route_update(rte)
+      { rte => { @verb => construct_path }.merge!('patch' => construct_path) }
     end
 
     def write_tag
-      [@tag_name]
+      [@tag_name.humanize]
+    end
+
+    def extract_tag(route)
+      route.split('/').reject do |rte|
+        rte.empty?
+      end.first.humanize
     end
 
     def summary(text)

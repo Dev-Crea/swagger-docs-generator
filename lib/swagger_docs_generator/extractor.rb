@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # :reek:NestedIterators
+# :reek:TooManyStatements
+# :reek:UtilityFunction
 
 module SwaggerDocsGenerator
   # # Extractor routes info
@@ -22,12 +24,14 @@ module SwaggerDocsGenerator
 
     # Extract path to routes and change format to parameter path
     def path
+      temporary = []
+      actual_route = nil
       router do |route|
-        route.path.spec.to_s.gsub('(.:format)',
-                                  '.json').gsub(/:[a-z1-9_A-Z]*/) do |word|
-          "{#{word.delete(':')}}"
-        end
+        actual_route = extract_and_format_route(route)
+        temporary.push(actual_route) unless temporary.include?(actual_route)
+        actual_route
       end
+      temporary
     end
 
     private
@@ -51,6 +55,13 @@ module SwaggerDocsGenerator
         data = yield(route, rte) if rte_controller(rte) && rte_action(rte)
       end
       data.downcase
+    end
+
+    def extract_and_format_route(route)
+      route.path.spec.to_s.gsub('(.:format)',
+                                '.json').gsub(/:[a-z1-9_A-Z]*/) do |word|
+        "{#{word.delete(':')}}"
+      end
     end
   end
 end

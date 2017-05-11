@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.0] - 2017-05-11
+### [Added]
+- Add sub propertie for definition
+- Add examples section in readme.md
+
 ## [0.3.6] - 2017-05-11
 ### [Fixed]
 - Nested resource add tag for each parent resource

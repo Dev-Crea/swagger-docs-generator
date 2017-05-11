@@ -52,6 +52,104 @@ Execute rake task for generated `swagger.json` :
 rake swagger:docs
 ```
 
+
+## Examples
+
+```ruby
+# frozen_string_literal: true
+
+module V1
+  # Documentation API for AddressesController
+  class AddressesDoc < BaseDoc
+    CONTROLLER = V1::Geos::AddressesController
+
+    # Describe object Addresses
+    # ###
+    scontroller 'User Addresses management'
+
+    # Describe all actions
+    # ###
+    sdoc :show do
+      summary 'Show address'
+      responses do
+        status 200
+        schema { definition 'address' }
+      end
+      responses { status 404 }
+      responses { status 422 }
+      description <<EOS
+  # Show address to user
+
+  Show complete address to user.
+EOS
+    end
+
+    sdoc :create do
+      summary 'Create address'
+      responses { status 201 }
+      responses { status 422 }
+      parameters do
+        body do
+          name 'address'
+          schema 'address create'
+        end
+      end
+      description <<EOS
+  # Add address
+
+  Save an address to user.
+EOS
+    end
+
+    sdoc :update do
+      summary 'Update address'
+      responses do
+        status 200
+        schema { definition 'address' }
+      end
+      responses { status 404 }
+      responses { status 422 }
+    end
+
+    sdoc :destroy do
+      summary 'Destroy address'
+      responses do
+        status 200
+        schema { definition 'address' }
+      end
+      responses { status 404 }
+      responses { status 422 }
+    end
+
+    # Add definition more model
+    # ###
+    sdefinition 'address create' do
+      required %w[address]
+      properties do
+        required %w{country city zip_code street}
+        properties country: { type: :string },
+                   city: { type: :string },
+                   zip_code: { type: :string },
+                   street: { type: :string },
+                   complements: { type: :string }
+      end
+    end
+
+    sdefinition 'address' do
+      required %w[address]
+      properties do
+        properties country: { type: :string },
+                   city: { type: :string },
+                   zip_code: { type: :string },
+                   street: { type: :string },
+                   complements: { type: :string },
+                   coordinates: { type: :string }
+      end
+    end
+  end
+end
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then,

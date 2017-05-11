@@ -7,12 +7,12 @@ module SwaggerDocsGenerator
   class EnvironmentGenerator < Rails::Generators::Base
     desc 'Generate a Environment `doc` for Swagger Docs Generator'
     ENVIRONMENT = <<-INIT
-# frozen_string_literal: true
+  # frozen_string_literal: true
 
-Rails.application.configure do
-  # Do not eader load code on boot.
-  config.eager_load = false
-end
+  Rails.application.configure do
+    # Do not eader load code on boot.
+    config.eager_load = false
+  end
     INIT
 
     # Create a new environment

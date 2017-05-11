@@ -5,8 +5,8 @@ module SwaggerDocsGenerator
   #
   # Metadata generated in swagger json file
   class Metadata
-    ACCEPT = %i(title version contact description host schemes base_path
-                swagger).freeze
+    ACCEPT = %i[title version contact description host schemes base_path
+                swagger].freeze
 
     def initialize
       @config = nil

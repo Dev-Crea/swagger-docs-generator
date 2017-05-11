@@ -27,8 +27,12 @@ module SwaggerDocsGenerator
       @type = text
     end
 
-    def properties(text)
-      @properties = text
+    def properties(text = nil, &block)
+      @properties = if block_given?
+                      { @required.first => SubProperties.new(&block).construct }
+                    else
+                      text
+                    end
     end
 
     def required(text)
@@ -52,3 +56,5 @@ module SwaggerDocsGenerator
     end
   end
 end
+
+require 'swagger_docs_generator/parser/sub_definition'

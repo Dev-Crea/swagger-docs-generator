@@ -26,8 +26,15 @@ module SwaggerDocsGenerator
       parse.adding_definition
     end
 
+    # Create section for display a README in top to documentation
+    def swagger_readme(readme_file)
+      parse = ParserReadme.new(readme_file)
+      parse.adding_readme
+    end
+
     alias scontroller   swagger_controller
     alias sdoc          swagger_doc
     alias sdefinition   swagger_definition
+    alias sreadme       swagger_readme
   end
 end

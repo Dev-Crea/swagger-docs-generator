@@ -5,7 +5,7 @@ module SwaggerDocsGenerator
   # Name to gem
   GEM =           'swagger_docs_generator'
   # Version to gem
-  VERSION =       '0.4.0'
+  VERSION =       '0.5.0'
   # Authors contributed to gem
   AUTHORS =       ['VAILLANT Jeremy'].freeze
   # Email to ahuthors

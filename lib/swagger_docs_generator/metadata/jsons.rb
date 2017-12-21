@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'swagger_docs_generator/metadata/sort'
+
 module SwaggerDocsGenerator
   # Parse temporary json files
   class MetadataJsons
@@ -14,7 +16,7 @@ module SwaggerDocsGenerator
         @paths[:paths].merge!(read_part_json(file, 'paths'))
         @tags_array.push read_part_json(file, 'tags')
       end
-      hash.merge(@paths).merge(tags: @tags_array)
+      hash.merge(sort_paths).merge(tags: @tags_array)
     end
 
     private
@@ -27,6 +29,16 @@ module SwaggerDocsGenerator
     # :reek:UtilityFunction
     def read_part_json(file, key)
       JSON.parse(File.read(file))[key]
+    end
+
+    def sort_paths
+      order = Sort.new(@paths)
+      case SwaggerDocsGenerator.configure.sort
+      when 'path' then order.sort_by_path
+      when 'tag' then order.sort_by_tag
+      else
+        @paths
+      end
     end
   end
 end

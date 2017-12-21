@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.5.1] - 2017-12-21
+### [Changed]
+- Update travis ruby version test
+
+### [Fixed]
+- Update gem (nokogiri and yard)
+
+## [0.5.0] - 2017-05-12
+### [Added]
+- Add method for display README
+- Add DSL attribute for order paths
+
+### [Fixed]
+- Disable many tag by path
+
 ## [0.4.0] - 2017-05-11
 ### [Added]
 - Add sub propertie for definition

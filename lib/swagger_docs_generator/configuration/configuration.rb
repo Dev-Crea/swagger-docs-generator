@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # :reek:Attribute
+# :reek:TooManyInstanceVariables
 module SwaggerDocsGenerator
   # # Configuration to swagger json file
   #
@@ -18,7 +19,7 @@ module SwaggerDocsGenerator
   # @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
   class Configuration
     # Accessors with default value
-    attr_accessor :swagger, :cleanning, :base_path, :compress
+    attr_accessor :swagger, :cleanning, :base_path, :compress, :sort
 
     # Accessors without default value
     attr_accessor :schemes, :consumes, :produces, :host, :external_docs,
@@ -30,6 +31,7 @@ module SwaggerDocsGenerator
       @base_path = '/'
       @cleanning = true
       @compress = false
+      @sort = 'tag'
     end
   end
 

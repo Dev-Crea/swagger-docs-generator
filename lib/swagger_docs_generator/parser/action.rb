@@ -44,7 +44,7 @@ module SwaggerDocsGenerator
       keys_new = hash.keys[0]
       paths = hash.keys.split.first
 
-      test_tags(paths, hash)
+      # test_tags(paths, hash)
       merge_hashes(old_route, keys_new.to_s, paths, hash)
     end
 

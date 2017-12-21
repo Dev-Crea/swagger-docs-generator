@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.5.1] - 2017-12-21
+### [Changed]
+- Update travis ruby version test
+
+### [Fixed]
 - Update gem (nokogiri and yard)
 
 ## [0.5.0] - 2017-05-12
